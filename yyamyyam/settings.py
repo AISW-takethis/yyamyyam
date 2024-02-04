@@ -90,11 +90,11 @@ WSGI_APPLICATION = "yyamyyam.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "yyamyyam",
+        "NAME": env("DB_NAME"),
         "USER": env("DB_USER"),
         "PASSWORD": env("DB_PWD"),
-        "HOST": "localhost",
-        "PORT": "5432",
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
 
