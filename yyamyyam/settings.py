@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+import environ
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,10 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-#p!qxl&1@pb9v=5b_y5mgq99@_ds2y(vihv$i3^ul3+-d_q*a0"
+env = environ.Env(DEBUG = (bool, True))
 
+# env 파일 로드
+environ.Env.read_env(
+	env_file = os.path.join(BASE_DIR, '.env')
+)
+
+SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -32,14 +40,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "diet.apps.DietConfig",
-    "user.apps.UserConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "diet.apps.DietConfig",
+    "user.apps.UserConfig",
 ]
 
 MIDDLEWARE = [
@@ -81,11 +89,11 @@ WSGI_APPLICATION = "yyamyyam.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "yyamyyam",
-        "USER": "takethis",
-        "PASSWORD": "takethis",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": env("DB_NAME"),
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PASSWORD"),
+        "HOST": env("DB_HOST"),
+        "PORT": env("DB_PORT"),
     }
 }
 
