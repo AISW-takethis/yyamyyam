@@ -12,19 +12,28 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 환경 변수를 불러올 수 있는 상태로 세팅
+env = environ.Env(DEBUG=(bool, True))
+
+environ.Env.read_env(
+    env_file=os.path.join(BASE_DIR, ".env")
+)
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-#p!qxl&1@pb9v=5b_y5mgq99@_ds2y(vihv$i3^ul3+-d_q*a0"
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = []
 
@@ -82,8 +91,8 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "yyamyyam",
-        "USER": "takethis",
-        "PASSWORD": "takethis",
+        "USER": env("DB_USER"),
+        "PASSWORD": env("DB_PWD"),
         "HOST": "localhost",
         "PORT": "5432",
     }

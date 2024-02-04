@@ -19,6 +19,7 @@ datasets @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_3
 dill @ file:///Users/ec2-user/ci_py311/dill_1678323290904/work
 Django @ file:///home/conda/feedstock_root/build_artifacts/django_1702056318805/work
 django-debug-toolbar==4.2.0
+django-environ==0.11.2
 filelock @ file:///private/var/folders/sy/f16zz6x50xz3113nwtb9bvq00000gp/T/abs_cd61an5em3/croot/filelock_1700591192468/work
 frozenlist @ file:///private/var/folders/c_/qfmhj66j0tn016nkx_th4hxm0000gp/T/abs_6e53v2xx31/croot/frozenlist_1698702576189/work
 fsspec @ file:///private/var/folders/c_/qfmhj66j0tn016nkx_th4hxm0000gp/T/abs_0df7iqlnzr/croot/fsspec_1701286489940/work
