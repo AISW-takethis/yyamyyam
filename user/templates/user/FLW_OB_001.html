@@ -1,0 +1,31 @@
+{#온보딩 - 로그인#}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "ko-KR">
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+	<title>OB-login</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_OB_001.css' %}">
+</head>
+<body>
+
+	<div class = "intro">
+		<p>
+			<span class = "intro-main">건강 고민 끝,</span>
+			<br/>
+			<span class = "intro-main">냠냠에 오신 것을 환영합니다!</span>
+		</p>
+
+		<p class = "intro-sub"> 3초 가입으로 바로 시작해보세요 </p>
+	</div>
+
+	<button type = "button" onclick = "">
+		<img src = "{% static 'user/images/kakao_icon.svg' %}" id = "kakao_icon_image">
+		<span id = "kakao_button_text">카카오 로그인</span>
+	</button>
+
+	<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image">
+
+</body>
+</html>
