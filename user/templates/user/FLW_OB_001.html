@@ -1,5 +1,6 @@
 {#온보딩 - 로그인#}
 {% load static %}
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang = "ko-KR">
 <head>
@@ -20,10 +21,13 @@
 		<p class = "intro-sub"> 3초 가입으로 바로 시작해보세요 </p>
 	</div>
 
-	<button type = "button" onclick = "">
-		<img src = "{% static 'user/images/kakao_icon.svg' %}" id = "kakao_icon_image">
-		<span id = "kakao_button_text">카카오 로그인</span>
-	</button>
+	<form action = "{% provider_login_url 'kakao' %}" method = "post">
+		{% csrf_token %}
+		<button>
+			<img src = "{% static 'user/images/kakao_icon.svg' %}" id = "kakao_icon_image">
+			<span id = "kakao_button_text">카카오 로그인</span>
+		</button>
+	</form>
 
 	<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image">
 
