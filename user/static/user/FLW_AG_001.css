@@ -1,0 +1,124 @@
+html {
+	width   : 100dvw;
+	height  : 100dvh;
+	padding : 0;
+	margin  : 0;
+}
+
+body {
+	padding : 0;
+	margin  : 0;
+}
+
+#login_background_image {
+	position   : absolute;
+	bottom     : 0;
+	object-fit : contain;
+	padding    : 0;
+	margin     : 0;
+	display    : block;
+	z-index    : -100;
+}
+
+.container {
+	overflow    : hidden;
+	margin-left : 5dvw;
+	margin-top  : 17dvh;
+}
+
+#agreement-main {
+	position    : absolute;
+	top         : 17dvh;
+	font-size   : 20px;
+	font-weight : 700;
+	text-align  : left;
+	color       : #4d525c;
+}
+
+#agreement-sub {
+	position   : absolute;
+	top        : 20.5dvh;
+	font-size  : 14px;
+	text-align : left;
+	color      : #4d525c;
+}
+
+#agreeAll {
+	width    : 5dvw;
+	height   : 5dvw;
+	position : absolute;
+	left     : 5dvw;
+	top      : 27dvh;
+}
+
+#agreement-all-main {
+	width       : 83dvw;
+	position    : absolute;
+	left        : 12dvw;
+	top         : 27dvh;
+	font-size   : 16px;
+	font-weight : 700;
+	text-align  : left;
+	color       : #4d525c;
+}
+
+#agreement-all-sub {
+	width       : 83dvw;
+	position    : absolute;
+	left        : 12dvw;
+	top         : 30dvh;
+	font-size   : 12px;
+	font-weight : 500;
+	text-align  : left;
+	color       : #7d8492;
+}
+
+#agreement-item-container {
+	width    : 90dvw;
+	position : absolute;
+	top      : 36dvh;
+}
+
+.agree-label {
+	border  : none;
+	padding : 0;
+	margin  : 0;
+}
+
+.agreement-item {
+	position    : absolute;
+	border      : none;
+	padding     : 0;
+	margin      : 0;
+	font-size   : 14px;
+	font-weight : 500;
+	text-align  : left;
+	color       : #4d525c;
+}
+
+#agreement-button {
+	width            : 90dvw;
+	height           : 6dvh;
+	position         : absolute;
+	background-color : #D9D9D9;
+	border           : none;
+	border-radius    : 10px;
+	top              : 86dvh;
+	left             : 50%;
+	margin-left      : -45dvw;
+}
+
+#agreement-button-text {
+	font-size   : 16px;
+	font-weight : 600;
+}
+
+* {
+	-webkit-tap-highlight-color : rgba(255, 255, 255, 0);
+	user-select                 : none;
+	-webkit-touch-callout       : none;
+}
+
+.floating-button {
+	padding-top : env(safe-area-inset-bottom);
+}
