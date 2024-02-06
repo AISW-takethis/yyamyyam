@@ -1,0 +1,142 @@
+{#약관 동의#}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "ko-KR">
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_AG_001.css' %}">
+</head>
+<body>
+	<form class = "form" action = "{% url 'user:agreement' %}" method = "post">
+		{% csrf_token %}
+		<div class = "container">
+			<p id = "agreement-main">약관에 동의해 주세요</p>
+			<p id = "agreement-sub">서비스 이용에 필요한 약관입니다.</p>
+
+			<div id = "agreement-all-container">
+
+				<input type = "checkbox" id = "agreeAll" name = "agree_all" value = "agree_all"/>
+				<label id = "agreement-all-main" for = "agree-all">모두 동의</label>
+				<p id = "agreement-all-sub">서비스 이용을 위해 아래 약관에 모두 동의합니다.</p>
+			</div>
+
+			<div id = "agreement-item-container">
+
+				<div>
+					<input type = "checkbox" id = "agree-age" name = "agree[]" value = "agree_age"/>
+					<label class = "agree-label" for = "agree-age">
+						<button class = "agreement-item" onclick = "popup_age()">[필수] 서비스 이용약관 동의</button>
+					</label>
+				</div>
+				<div>
+					<input type = "checkbox" id = "agree-tos" name = "agree[]" value = "agree_tos"/>
+					<label class = "agree-label" for = "agree-tos">
+						<button class = "agreement-item" onclick = "popup_tos()">[필수] 만 14세 이상 확인</button>
+					</label>
+				</div>
+				<div>
+					<input type = "checkbox" id = "agree-pp" name = "agree[]" value = "agree_pp"/>
+					<label class = "agree-label" for = "agree-pp">
+						<button class = "agreement-item" onclick = "popup_pp()">[필수] 개인정보 처리방침 동의</button>
+					</label>
+				</div>
+				<div>
+					<input type = "checkbox" id = "agree-mc" name = "agree[]" value = "agree_mc"/>
+					<label class = "agree-label" for = "agree-mc">
+						<button class = "agreement-item" onclick = "popup_mc()">[선택] 마케팅 수신 동의</button>
+					</label>
+				</div>
+			</div>
+
+			<button id = "agreement-button">
+				<span id = "agreement-button-text">동의 완료하고 계속하기</span>
+			</button>
+		</div>
+
+		<script type = "application/javascript">
+			document.querySelector('#agreeAll');
+
+			agreeAll.addEventListener('click', function () {
+
+				const isChecked = agreeAll.checked;
+
+				if (isChecked) {
+					const checkboxes = document.querySelectorAll('input[name="agree[]"]');
+
+					for (const checkbox of checkboxes) {
+						checkbox.checked = true;
+					}
+				} else {
+					const checkboxes = document.querySelectorAll('input[name="agree[]"]');
+					for (const checkbox of checkboxes) {
+						checkbox.checked = false;
+					}
+				}
+			})
+
+			const checkboxes = document.querySelectorAll('input[name="agree[]"]');
+			for (const checkbox of checkboxes) {
+				checkbox.addEventListener('click', function () {
+
+					const totalCnt = checkboxes.length;
+
+					const checkedCnt = document.querySelectorAll('input[name="agree[]"]:checked').length;
+
+					document.querySelector('#agreeAll').checked = totalCnt === checkedCnt;
+
+				});
+
+			}
+
+		</script>
+		<script type = "application/javascript">
+			function popup_age() {
+				const url = "http://localhost:8000/signup/agreement/age";
+				const name = "test";
+				const option = "width = 200, height = 500, top = 10, left = 20, location = no";
+				window.open(url, name, option);
+			}
+
+			function popup_tos() {
+				const url = "http://localhost:8000/signup/agreement/tos";
+				const name = "test";
+				const option = "width = 200, height = 500, top = 10, left = 20, location = no";
+				window.open(url, name, option);
+			}
+
+			function popup_pp() {
+				const url = "http://localhost:8000/signup/agreement/pp";
+				const name = "test";
+				const option = "width = 200, height = 500, top = 10, left = 20, location = no";
+				window.open(url, name, option);
+			}
+
+			function popup_mc() {
+				const url = "http://localhost:8000/signup/agreement/mc";
+				const name = "test";
+				const option = "width = 200, height = 500, top = 10, left = 20, location = no";
+				window.open(url, name, option);
+			}
+		</script>
+
+
+		{#<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image">#}
+
+	</form>
+</body>
+</html>
+
+{% comment %}
+<form class = "form" action = "{% url 'appMain:predict' %}" method = "post">
+	{% csrf_token %}
+	<div class = "container">
+		<label id = "promptInputLabel" for = "promptInput">Stable Diffusion 모델 활용을 위해 영어로 프롬프트를 입력해 주세요 </label>
+		<div id = "prompt-input">
+			<input type = "text" id = "promptInput" placeholder = "Type your prompt here!" oninput = "handleOnInput(this)" name = "prompt" value = "{{ prompt }}" autofocus>
+			<button type = "submit" id = "promptSubmit" value = "submit prompt">submit prompt</button>
+		</div>
+	</div>
+</form>
+{% endcomment %}
