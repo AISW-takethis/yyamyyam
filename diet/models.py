@@ -16,8 +16,10 @@ class UserDiet(models.Model):
 
 class DetailOfDiet(models.Model):
     diet = models.ForeignKey(UserDiet, on_delete=models.CASCADE)
-    image_x = models.IntegerField(null=True, blank=True, db_comment="이미지의 x좌표,  사용자가 직접 추가한 식단이면 null")
-    image_y = models.IntegerField(null=True, blank=True, db_comment="이미지의 y좌표,  사용자가 직접 추가한 식단이면 null")
+    image_x_start = models.IntegerField(null=True, blank=True, db_comment="이미지의 x 시작좌표,  사용자가 직접 추가한 식단이면 null")
+    image_x_end = models.IntegerField(null=True, blank=True, db_comment="이미지의 x 끝좌표,  사용자가 직접 추가한 식단이면 null")
+    image_y_start = models.IntegerField(null=True, blank=True, db_comment="이미지의 y 시작좌표,  사용자가 직접 추가한 식단이면 null")
+    image_y_end = models.IntegerField(null=True, blank=True, db_comment="이미지의 y 끝좌표,  사용자가 직접 추가한 식단이면 null")
     name = models.CharField(max_length=100, db_comment="음식 이름")
     carbohydrate = models.FloatField(db_comment="1인분당 탄수화물")
     protein = models.FloatField(db_comment="1인분당 단백질")
