@@ -33,7 +33,9 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="detailofdiet",
             name="quantity",
-            field=models.FloatField(db_comment="m.n 인분(0.5, 1, 1.5, 2 인분 설정 가능)"),
+            field=models.FloatField(
+                db_comment="m.n 인분(0.5, 1, 1.5, 2 인분 설정 가능)"
+            ),
         ),
         migrations.AlterField(
             model_name="food",
