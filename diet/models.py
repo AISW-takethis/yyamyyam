@@ -4,9 +4,16 @@ from django.contrib.auth.models import User
 
 class UserDiet(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image_path = models.CharField(max_length=100, null=True, blank=True, db_comment="식단 이미지 경로, 사용자가 직접 추가한 식단이면 null")
+    image_path = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        db_comment="식단 이미지 경로, 사용자가 직접 추가한 식단이면 null",
+    )
     take_at = models.DateField(db_comment="식단을 섭취한 날짜")
-    meal = models.IntegerField(default=1, db_comment="1은 아침, 2는 점심, 3은 저녁, 4는 간식, 5는 야식")
+    meal = models.IntegerField(
+        default=1, db_comment="1은 아침, 2는 점심, 3은 저녁, 4는 간식, 5는 야식"
+    )
     memo = models.TextField(null=True, blank=True, db_comment="식단에 대한 메모")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -16,10 +23,26 @@ class UserDiet(models.Model):
 
 class DetailOfDiet(models.Model):
     diet = models.ForeignKey(UserDiet, on_delete=models.CASCADE)
-    image_x_start = models.IntegerField(null=True, blank=True, db_comment="이미지의 x 시작좌표,  사용자가 직접 추가한 식단이면 null")
-    image_x_end = models.IntegerField(null=True, blank=True, db_comment="이미지의 x 끝좌표,  사용자가 직접 추가한 식단이면 null")
-    image_y_start = models.IntegerField(null=True, blank=True, db_comment="이미지의 y 시작좌표,  사용자가 직접 추가한 식단이면 null")
-    image_y_end = models.IntegerField(null=True, blank=True, db_comment="이미지의 y 끝좌표,  사용자가 직접 추가한 식단이면 null")
+    image_x_start = models.IntegerField(
+        null=True,
+        blank=True,
+        db_comment="이미지의 x 시작좌표,  사용자가 직접 추가한 식단이면 null",
+    )
+    image_x_end = models.IntegerField(
+        null=True,
+        blank=True,
+        db_comment="이미지의 x 끝좌표,  사용자가 직접 추가한 식단이면 null",
+    )
+    image_y_start = models.IntegerField(
+        null=True,
+        blank=True,
+        db_comment="이미지의 y 시작좌표,  사용자가 직접 추가한 식단이면 null",
+    )
+    image_y_end = models.IntegerField(
+        null=True,
+        blank=True,
+        db_comment="이미지의 y 끝좌표,  사용자가 직접 추가한 식단이면 null",
+    )
     name = models.CharField(max_length=100, db_comment="음식 이름")
     carbohydrate = models.FloatField(db_comment="1인분당 탄수화물")
     protein = models.FloatField(db_comment="1인분당 단백질")

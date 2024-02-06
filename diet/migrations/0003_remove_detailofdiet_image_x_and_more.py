@@ -10,34 +10,48 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="detailofdiet", name="image_x",),
-        migrations.RemoveField(model_name="detailofdiet", name="image_y",),
+        migrations.RemoveField(
+            model_name="detailofdiet",
+            name="image_x",
+        ),
+        migrations.RemoveField(
+            model_name="detailofdiet",
+            name="image_y",
+        ),
         migrations.AddField(
             model_name="detailofdiet",
             name="image_x_end",
             field=models.IntegerField(
-                blank=True, db_comment="이미지의 x 끝좌표,  사용자가 직접 추가한 식단이면 null", null=True
+                blank=True,
+                db_comment="이미지의 x 끝좌표,  사용자가 직접 추가한 식단이면 null",
+                null=True,
             ),
         ),
         migrations.AddField(
             model_name="detailofdiet",
             name="image_x_start",
             field=models.IntegerField(
-                blank=True, db_comment="이미지의 x 시작좌표,  사용자가 직접 추가한 식단이면 null", null=True
+                blank=True,
+                db_comment="이미지의 x 시작좌표,  사용자가 직접 추가한 식단이면 null",
+                null=True,
             ),
         ),
         migrations.AddField(
             model_name="detailofdiet",
             name="image_y_end",
             field=models.IntegerField(
-                blank=True, db_comment="이미지의 y 끝좌표,  사용자가 직접 추가한 식단이면 null", null=True
+                blank=True,
+                db_comment="이미지의 y 끝좌표,  사용자가 직접 추가한 식단이면 null",
+                null=True,
             ),
         ),
         migrations.AddField(
             model_name="detailofdiet",
             name="image_y_start",
             field=models.IntegerField(
-                blank=True, db_comment="이미지의 y 시작좌표,  사용자가 직접 추가한 식단이면 null", null=True
+                blank=True,
+                db_comment="이미지의 y 시작좌표,  사용자가 직접 추가한 식단이면 null",
+                null=True,
             ),
         ),
     ]
