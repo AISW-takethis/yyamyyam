@@ -92,7 +92,7 @@ body {
 
 .agreement-item {
 	display              : flex;
-	width                : 100%;
+	width                : 99%;
 	position             : absolute;
 	border               : none;
 	padding              : 0;
