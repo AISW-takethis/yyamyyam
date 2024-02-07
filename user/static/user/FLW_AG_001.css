@@ -44,8 +44,8 @@ body {
 }
 
 #agreeAll {
-	width    : 5dvw;
-	height   : 5dvw;
+	width    : 20px;
+	height   : 20px;
 	position : absolute;
 	left     : 5dvw;
 	top      : 27dvh;
@@ -85,15 +85,30 @@ body {
 	margin  : 0;
 }
 
+.div-checkbox {
+	display       : flex;
+	margin-bottom : 1dvh;
+}
+
 .agreement-item {
-	position    : absolute;
-	border      : none;
-	padding     : 0;
-	margin      : 0;
-	font-size   : 14px;
-	font-weight : 500;
-	text-align  : left;
-	color       : #4d525c;
+	display              : flex;
+	width                : 100%;
+	position             : absolute;
+	border               : none;
+	padding              : 0;
+	margin               : 0;
+	font-size            : 14px;
+	font-weight          : 500;
+	text-align           : left;
+	text-decoration-line : underline;
+	color                : #4d525c;
+}
+
+.agreement-item-image {
+	display      : inline-block;
+	height       : 100%;
+	margin-left  : auto;
+	margin-right : 5dvw;
 }
 
 #agreement-button {
