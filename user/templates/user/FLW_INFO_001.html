@@ -1,0 +1,34 @@
+{#사용자 정보#}
+{% load static %}
+<!DOCTYPE html>
+<html lang = "ko-KR">
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_001.css' %}">
+</head>
+<body>
+	<form class = "form" action = "{% url 'user:agreement' %}" method = "post" name = "agreement_form">
+		{% csrf_token %}
+		<div class = "container">
+
+			<p id = "welcome-main">환영합니다!</p>
+			<p id = "welcome-sub">
+				<span>냠냠은 고객의 건강한 식습관을 위해</span>
+				<br/>
+				<span>성별, 나이, 키, 몸무게, 영양 목표, 활동 수준 및</span>
+				<br/>
+				<span>기타 정보를 수집하여 하루 권장 칼로리를 제공합니다.</span>
+			</p>
+
+			<button id = "next-button" type = "submit">
+				<span id = "next-button-text">다음</span>
+			</button>
+		</div>
+
+		{#<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image" alt="">#}
+
+	</form>
+</body>
+</html>
