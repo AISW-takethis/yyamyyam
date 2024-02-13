@@ -10,7 +10,7 @@
 	<script type = "text/javascript" src = "{% static 'user/FLW_AG_001.js' %}"></script>
 </head>
 <body>
-	<form class = "form" action = "{% url 'user:agreement' %}" method = "post" name = "agreement_form">
+	<form class = "form" action = "{% url 'user:welcome' %}" method = "post" name = "agreement_form">
 		{% csrf_token %}
 		<div class = "container">
 			<p id = "agreement-main">약관에 동의해 주세요</p>
