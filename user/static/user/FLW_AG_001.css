@@ -31,14 +31,6 @@
 	color      : #4d525c;
 }
 
-#agreeAll {
-	width    : 20px;
-	height   : 20px;
-	position : absolute;
-	left     : 5dvw;
-	top      : 27dvh;
-}
-
 #agreement-all-main {
 	width       : 83dvw;
 	position    : absolute;
@@ -67,29 +59,25 @@
 	top      : 36dvh;
 }
 
-.agree-label {
-	border  : none;
-	padding : 0;
-	margin  : 0;
-}
-
 .div-checkbox {
 	display       : flex;
 	margin-bottom : 1dvh;
 }
 
-.agreement-item {
-	display              : flex;
-	width                : 99%;
-	position             : absolute;
-	border               : none;
-	padding              : 0;
-	margin               : 0;
-	font-size            : 14px;
-	font-weight          : 500;
-	text-align           : left;
-	text-decoration-line : underline;
-	background-color     : transparent;
+/*.agree-label {
+	border  : none;
+	padding : 0;
+	margin  : 0;
+}*/
+
+.agree-label {
+	border           : none;
+	padding          : 0;
+	margin           : 0;
+	font-size        : 14px;
+	font-weight      : 500;
+	text-align       : left;
+	background-color : transparent;
 }
 
 .agreement-item-text {
@@ -97,17 +85,54 @@
 }
 
 .agreement-item-image {
-	display      : inline-block;
+	/*display      : inline-block;*/
+	width        : auto;
 	height       : 100%;
 	margin-left  : auto;
-	margin-right : 5dvw;
+	margin-right : 0;
+}
+
+#agreement-all-container > input[type=checkbox] {
+	display : none;
+}
+
+#agreement-all-container > input[type=checkbox] + label {
+	cursor            : pointer;
+	background-repeat : no-repeat;
+	background-image  : url("images/checkbox_non_selected.svg");
+	height            : auto;
+	left              : 5dvw;
+	top               : 27dvh;
+	padding-left      : 28px;
+}
+
+#agreement-all-container > input[type=checkbox]:checked + label {
+	background-image : url("images/checkbox_selected.svg");
+}
+
+.div-checkbox > input[type=checkbox] {
+	display : none;
+}
+
+.div-checkbox > input[type=checkbox] + label {
+	cursor            : pointer;
+	background-repeat : no-repeat;
+	background-image  : url("images/checkbox_non_selected.svg");
+	display           : flex;
+	width             : auto;
+	height            : 2.8dvh;
+	padding-left      : 28px;
+}
+
+.div-checkbox > input[type=checkbox]:checked + label {
+	background-image : url("images/checkbox_selected.svg");
 }
 
 #agreement-button {
 	width            : 90dvw;
 	height           : 6dvh;
 	position         : absolute;
-	background-color : #D9D9D9;
+	background-color : #009A6E;
 	border           : none;
 	border-radius    : 8px;
 	top              : 86dvh;
@@ -118,4 +143,5 @@
 #agreement-button-text {
 	font-size   : 16px;
 	font-weight : 600;
+	color       : white;
 }
