@@ -68,13 +68,20 @@ def mc(request):
 
 
 def welcome(request):
-    user_profile.user_id = request.user.id
+    # user_profile.user_id = request.user.id
 
     agrees = request.POST.getlist("agree[]", False)
-    user_profile.agree_age_confirmation = "agree_age" in agrees
-    user_profile.agree_terms_of_service = "agree_tos" in agrees
-    user_profile.agree_privacy_policy = "agree_pp" in agrees
-    user_profile.agree_marketing_consent = "agree_mc" in agrees
+    # user_profile.agree_age_confirmation = "agree_age" in agrees
+    # user_profile.agree_terms_of_service = "agree_tos" in agrees
+    # user_profile.agree_privacy_policy = "agree_pp" in agrees
+    # user_profile.agree_marketing_consent = "agree_mc" in agrees
+
+    user_context = {
+        "age_confirmation": "agree_age" in agrees,
+        "terms_of_service_agreement": "agree_tos" in agrees,
+        "privacy_policy_agreement": "agree_pp" in agrees,
+        "marketing_consent_agreement": "agree_mc" in agrees,
+    }
 
     user_data = json.dumps(
         list(SocialAccount.objects.filter(user_id=request.user.id).values("extra_data"))
@@ -83,23 +90,24 @@ def welcome(request):
     context = {"user_data": json.loads(user_data)}
     context = context["user_data"]["extra_data"]
 
-    print(context)
     try:
-        user_profile.nickname = context["kakao_account"]["profile"]["nickname"]
+        user_context["nickname"] = context["kakao_account"]["profile"]["nickname"]
     except:
-        user_profile.nickname = None
+        user_context["nickname"] = None
 
     try:
-        user_profile.gender = 1 if context["kakao_account"]["gender"] == "male" else 0
+        user_context["gender"] = (
+            1 if context["kakao_account"]["gender"] == "male" else 0
+        )
     except:
-        user_profile.gender = 1
+        user_context["gender"] = 1
 
     try:
-        user_profile.birth = (
+        user_context["birth"] = (
             context["kakao_account"]["birthyear"] + context["kakao_account"]["birthday"]
         )
     except:
-        user_profile.birth = None
+        user_context["birth"] = None
 
-    user_profile.save()
+    request.session["prediction"] = user_context
     return render(request, "user/FLW_INFO_001.html")

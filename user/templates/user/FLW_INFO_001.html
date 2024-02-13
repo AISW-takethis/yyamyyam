@@ -1,14 +1,16 @@
 {#사용자 정보#}
+{% extends "user/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang = "ko-KR">
-<head>
-	<meta charset = "UTF-8">
-	<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+{% block head %}
 	<title>agreement</title>
 	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_001.css' %}">
-</head>
-<body>
+{% endblock %}
+
+{% block header %}
+	기본정보 입력
+{% endblock %}
+
+{% block main %}
 	<form class = "form" action = "{% url 'user:agreement' %}" method = "post" name = "agreement_form">
 		{% csrf_token %}
 		<div class = "container">
@@ -26,9 +28,5 @@
 				<span id = "next-button-text">다음</span>
 			</button>
 		</div>
-
-		{#<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image" alt="">#}
-
 	</form>
-</body>
-</html>
+{% endblock %}
