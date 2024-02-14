@@ -1,8 +1,34 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
+
+
 :root {
-    /* TODO */
-    --primary-color: #009a6e;
-    --secondary-color: #333;
-    --tertiary-color: #f0f0f0;
+    --primary-light: #009a6e;
+    --secondary-light: #3ba688;
+    --grayscale-01: #181818;
+    --grayscale-02: #66625f;
+    --grayscale-03: #b3b3b3;
+    --grayscale-04: #dddddd;
+    --grayscale-05: #f3f3f3;
+    --grayscale-06: #fafafa;
+    --error: #dd1d1d;
+    --warning: #ed811e;
+    --confirm: #00be40;
+}
+
+h1 {
+    font-size: 20px
+}
+
+h2 {
+    font-size: 16px;
+}
+
+h3 = {
+    font-size: 14px;
+}
+
+span, p {
+    font-size: 12px;
 }
 
 body, html {
@@ -12,7 +38,9 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #fff;
+    background-color: white;
+    font-family: "Pretendard";
+    font-size: 12px;
 }
 
 .mobile {
@@ -31,29 +59,41 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid #333;
-    background-color: var(--primary-color);
-    color: white;
+    border-bottom: 1px solid var(--grayscale-05);
+    background-color: white;
+    color: var(--grayscale-01);
     font-size: 2rem;
 }
 
 main {
     width: 100%;
     flex: 1;
-    background-color: #fff;
-    /* Django 템플릿 적용 예정 */
+    background-color: var(--grayscale-06);
 }
 
 nav {
     width: 100%;
     height: 60px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    background-color: #333;
+    background-color: white;
+    border-top: 1px solid var(--grayscale-05);
+}
+
+nav div {
+    display: grid;
+    justify-items: center;
+    color: var(--grayscale-03);
+    font-size: 14px;
+}
+
+.selected {
+    color: var(--primary-light);
 }
 
 nav i {
-    color: white;
-    font-size: 24px;
+    color: var(--grayscale-03);
+    font-size: 20px;
 }
+
