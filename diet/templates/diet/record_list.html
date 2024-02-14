@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}식단 기록{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'diet/css/record_list.css' %}">
+<style>
+    .selected-date {
+        background-image: url("{% static 'asset/calendar_circle.png' %}");
+        background-size: contain; /* 이미지가 요소의 높이에 맞게 조절되도록 설정 */
+        background-position: center; /* 이미지가 요소의 가운데에 위치하도록 설정 */
+        background-repeat: no-repeat; /* 이미지가 반복되지 않도록 설정 */
+        color: white;
+}
+</style>
+{% endblock css %}
+{% block header %}식단 기록{% endblock %}
+{% block main %}
+    <div class="container my-1 pt-3 white-row">
+            <div class="row justify-content-center mb-3">
+                <div class="col-4">
+                    <div id="prev-week" role="button" class="text-end"><</div>
+                </div>
+                <div id="this-date" class="col-4 text-center fw-bold">
+                    2월 12일 (월)
+                </div>
+                <div class="col-4 ">
+                    <div id="next-week" role="button" class="">></div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <table id="week-calendar" class="calendar-table">
+                    <thead>
+                        <!-- 요일 표시 -->
+                    </thead>
+                    <tbody>
+                        <!-- 날짜 표시 -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="container white-row">
+            <!-- 식단 기록 영역 -->
+            <div class="mb-4 py-3">
+              <h2>식단 기록</h2>
+              <span class="fs-5">847Kcal</span><span> / 2,100Kcal</span>
+              <div class="d-flex align-items-center mt-2 summary-box py-3">
+                  <span class="nutrition-status badge bg-warning me-5"> 부족</span>
+                  <span class="grayscale-02">탄수화물 118g · 단백질 31g · 지방 22g</span>
+              </div>
+            </div>
+        </div>
+
+        <!-- 식사별 카드 영역 -->
+        <div class="container">
+            <!-- 아침 카드 -->
+            <div class="row d-flex align-items-center meal-card px-1 py-3 mx-1">
+
+                <div class="col-2 align-items-center text-center">
+                    <div class="row mb-2">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <div class="row justify-content-center">
+                        아침
+                    </div>
+                </div>
+                <div class="col-3">
+                    <img src="{% static 'asset/food_image.png' %}" style="width:70px;" alt="아침 식사 이미지" />
+                </div>
+                <div class="col-7">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <span class="fs-5">364kcal</span>
+                            <i class="fas fa-pen grayscale-02"> </i>
+                        </div>
+                        <div>
+                            <span class="grayscale-02">탄수화물 54g · 단백질 24g · 지방 8g</span>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- 아침 카드 끝-->
+
+            <!-- 점심 카드 -->
+            <div class="row d-flex align-items-center meal-card px-1 py-3 mx-1 my-3">
+
+                <div class="col-2 align-items-center text-center">
+                    <div class="row mb-2">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <div class="row justify-content-center">
+                        점심
+                    </div>
+                </div>
+                <div class="col-3">
+                    <img src="{% static 'asset/food_image.png' %}" style="width:70px;" alt="아침 식사 이미지" />
+                </div>
+                <div class="col-7">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <span class="fs-5">364kcal</span>
+                            <i class="fas fa-pen grayscale-02"> </i>
+                        </div>
+                        <div>
+                            <span class="grayscale-02">탄수화물 54g · 단백질 24g · 지방 8g</span>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- 점심 카드 끝-->
+          </div>
+{% endblock main %}
+{% block script %}
+<script src="{% static 'diet/js/record_list.js' %}"></script>
+{% endblock script %}
