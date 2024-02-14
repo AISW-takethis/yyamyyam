@@ -1,3 +1,8 @@
+
+#history_back {
+	display : inline-block;
+}
+
 #progress-bar {
 	position   : absolute;
 	width      : 100dvw;
@@ -16,44 +21,50 @@
 	background : #009A6E;
 }
 
-p {
-	margin-top    : 10px;
-	margin-bottom : 10px;
-}
-
-#login_background_image {
-	position   : absolute;
-	bottom     : 0;
-	object-fit : contain;
-	padding    : 0;
-	margin     : 0;
-	display    : block;
-	z-index    : -100;
-}
-
 .container {
 	overflow    : hidden;
 	margin-left : 5dvw;
 	margin-top  : 10.7dvh;
 }
 
-#welcome-main {
+#nickname-main {
 	font-size   : 20px;
-	/*text-size-adjust : auto;*/
 	font-weight : 600;
 	text-align  : left;
-	color       : #4d525c;
+	color       : #181818;
 
 }
 
-#welcome-sub {
-	font-size  : 14px;
-	/*text-size-adjust : 70%;*/
+#nickname-condition {
+	font-size  : 12px;
 	text-align : left;
-	color      : #4d525c;
+	color      : #66625f;
 }
 
-#next-button {
+#nickname_input {
+	width         : 90dvw;
+	height        : 6dvh;
+	color         : #181818;
+	border        : 1px solid #B3B3B3;
+	border-radius : 8px;
+}
+
+#nickname_input::placeholder {
+	color      : #B3B3B3;
+	font-size  : 14px;
+	text-align : left;
+}
+
+#nickname_error {
+	font-size   : 12px;
+	font-weight : 600;
+	text-align  : center;
+	/*color       : var(--warning);*/
+	color       : #ed811e;
+}
+
+
+#next_button {
 	width            : 90dvw;
 	height           : 6dvh;
 	position         : absolute;
@@ -65,11 +76,11 @@ p {
 	margin-left      : -45dvw;
 }
 
-#next-button:disabled {
+#next_button:disabled {
 	background-color : #DDDDDD;
 }
 
-#next-button-text {
+#next_button-text {
 	font-size   : 16px;
 	font-weight : 600;
 	color       : white;

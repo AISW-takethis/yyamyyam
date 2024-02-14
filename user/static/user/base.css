@@ -21,16 +21,30 @@ body {
 }
 
 .header-text {
-	margin      : 0;
+	position    : absolute;
 	padding     : 0;
 	font-size   : 16px;
 	color       : #181818;
 	font-weight : 600;
+	left        : 50%;
+	top         : 50%;
+	transform   : translate(-50%, -50%);
 }
 
 header {
-	text-align     : center;
-	border-bottom  : 1px solid #F3F3F3;
-	padding-top    : 2.25dvh;
-	padding-bottom : 2.25dvh;
+	position      : relative;
+	height        : 6.6dvh;
+	border-bottom : 1px solid #F3F3F3;
+	/*padding-top    : 2.25dvh;*/
+	/*padding-bottom : 2.25dvh;*/
+	text-align    : center;
+}
+
+#history_back {
+	display     : none;
+	position    : absolute;
+	margin-left : 4dvw;
+	left        : 0;
+	top         : 50%;
+	transform   : translateY(-50%);
 }

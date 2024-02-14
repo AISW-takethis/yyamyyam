@@ -32,6 +32,7 @@ def agreement(request):
     #     # request.user.id
     #     if UserProfile.objects.filter(user_id=request.user.id).exists():
     #         return redirect("diet:recommand_diet")
+    # TODO 모든 웹페이지에서 로그인되어있지 않은 상태라면 스플래시 화면으로 리다이텍트
 
     # 신규 가입자라면 동의 페이지 렌더
     # 세션으로 동의 유지
@@ -69,6 +70,7 @@ def mc(request):
 
 def welcome(request):
     # user_profile.user_id = request.user.id
+    user_context = request.session.get("user_input", None)
 
     agrees = request.POST.getlist("agree[]", False)
     # user_profile.agree_age_confirmation = "agree_age" in agrees
@@ -76,12 +78,11 @@ def welcome(request):
     # user_profile.agree_privacy_policy = "agree_pp" in agrees
     # user_profile.agree_marketing_consent = "agree_mc" in agrees
 
-    user_context = {
-        "age_confirmation": "agree_age" in agrees,
-        "terms_of_service_agreement": "agree_tos" in agrees,
-        "privacy_policy_agreement": "agree_pp" in agrees,
-        "marketing_consent_agreement": "agree_mc" in agrees,
-    }
+    if user_context is not None:
+        user_context["age_confirmation"] = "agree_age" in agrees
+        user_context["terms_of_service_agreement"] = "agree_tos" in agrees
+        user_context["privacy_policy_agreement"] = "agree_pp" in agrees
+        user_context["marketing_consent_agreement"] = "agree_mc" in agrees
 
     user_data = json.dumps(
         list(SocialAccount.objects.filter(user_id=request.user.id).values("extra_data"))
@@ -109,5 +110,20 @@ def welcome(request):
     except:
         user_context["birth"] = None
 
-    request.session["prediction"] = user_context
+    request.session["user_input"] = user_context
     return render(request, "user/FLW_INFO_001.html")
+
+
+def nickname(request):
+    return render(request, "user/FLW_INFO_002.html")
+
+
+def birth(request):
+    user_context = request.session.get("user_input", None)
+    nickname = request.POST.get("nickname_input", None)
+
+    if user_context is not None:
+        user_context["nickname"] = nickname
+
+    request.session["user_input"] = user_context
+    return render(request, "user/FLW_INFO_003.html")

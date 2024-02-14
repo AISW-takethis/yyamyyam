@@ -1,0 +1,51 @@
+{#사용자 정보#}
+{% extends "user/user_base.html" %}
+{% load static %}
+{% block head %}
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_002.css' %}">
+{% endblock %}
+
+{% block header %}
+	기본정보 입력
+{% endblock %}
+
+{% block main %}
+	<progress id = "progress-bar" value = "20" max = "100"></progress>
+	<form class = "form" action = "{% url 'user:birth' %}" method = "post" name = "nickname_form">
+		{% csrf_token %}
+		<div class = "container">
+
+			<p id = "nickname-main">
+				<span>냠냠에서 사용할</span>
+				<br/>
+				<span>닉네임을 입력해주세요</span>
+			</p>
+
+			<label for = "nickname_input"></label>
+			<input type = "text" id = "nickname_input" placeholder = "닉네임을 입력해 주세요." name = "nickname_input" autofocus>
+
+			<p id = "nickname-condition"> 문자 2자 이상 (숫자 혼용 가능) </p>
+
+			<p id = "nickname_error"></p>
+
+			<button id = "next_button" disabled = "disabled" type = "submit">
+				<span id = "next_button-text">다음</span>
+			</button>
+		</div>
+
+		<script type = "application/javascript">
+			nickname_input.oninput = function () {
+				{#nickname_error.innerHTML = nickname_input.value;#}
+				if (!/^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/.test(nickname_input.value)) {
+					next_button.disabled = true
+					nickname_error.innerHTML = "닉네임은 2-10자리의 한글, 영문, 숫자만 가능합니다."
+				} else {
+					// TODO 데이터베이스에서 닉네임 중복 체크...의 필요가 있나?
+					next_button.disabled = false
+					nickname_error.innerHTML = ""
+				}
+			}
+		</script>
+	</form>
+{% endblock %}

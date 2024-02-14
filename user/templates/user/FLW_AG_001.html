@@ -1,5 +1,5 @@
 {#약관 동의#}
-{% extends "user/base.html" %}
+{% extends "user/user_base.html" %}
 {% load static %}
 
 {% block head %}
@@ -27,38 +27,37 @@
 			</div>
 
 			<div id = "agreement-item-container">
-
 				<div class = "div-checkbox">
-					<input type = "checkbox" id = "agree_age" name = "agree[]" value = "agree_age"/>
+					<input type = "checkbox" id = "agree_age" name = "agree[]" onclick = "check_essential()" value = "agree_age"/>
 					<label class = "agree-label" for = "agree_age">
 						<span class = "agreement-item-text">[필수] 만 14세 이상 확인</span>
 					</label>
 					<span class = "agreement-item-image" onclick = "popup_age()">보기</span>
 				</div>
 				<div class = "div-checkbox">
-					<input type = "checkbox" id = "agree_tos" name = "agree[]" value = "agree_tos"/>
+					<input type = "checkbox" id = "agree_tos" name = "agree[]" onclick = "check_essential()" value = "agree_tos"/>
 					<label class = "agree-label" for = "agree_tos">
 						<span class = "agreement-item-text">[필수] 서비스 이용약관 동의</span>
 					</label>
-					<span class = "agreement-item-image" onclick = "popup_age()">보기</span>
+					<span class = "agreement-item-image" onclick = "popup_tos()">보기</span>
 				</div>
 				<div class = "div-checkbox">
-					<input type = "checkbox" id = "agree_pp" name = "agree[]" value = "agree_pp"/>
+					<input type = "checkbox" id = "agree_pp" name = "agree[]" onclick = "check_essential()" value = "agree_pp"/>
 					<label class = "agree-label" for = "agree_pp">
 						<span class = "agreement-item-text">[필수] 개인정보 처리방침 동의</span>
 					</label>
-					<span class = "agreement-item-image" onclick = "popup_age()">보기</span>
+					<span class = "agreement-item-image" onclick = "popup_pp()">보기</span>
 				</div>
 				<div class = "div-checkbox">
 					<input type = "checkbox" id = "agree_mc" name = "agree[]" value = "agree_mc"/>
 					<label class = "agree-label" for = "agree_mc">
 						<span class = "agreement-item-text">[선택] 마케팅 수신 동의</span>
 					</label>
-					<span class = "agreement-item-image" onclick = "popup_age()">보기</span>
+					<span class = "agreement-item-image" onclick = "popup_mc()">보기</span>
 				</div>
 			</div>
 
-			<button id = "agreement-button" type = "submit" onclick = "check_essential()">
+			<button id = "agreement_button" disabled = "disabled" type = "submit">
 				<span id = "agreement-button-text">동의 완료하고 계속하기</span>
 			</button>
 		</div>
@@ -82,6 +81,7 @@
 						checkbox.checked = false;
 					}
 				}
+				check_essential()
 			})
 
 			const checkboxes = document.querySelectorAll('input[name="agree[]"]');
