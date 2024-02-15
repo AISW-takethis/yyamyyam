@@ -35,18 +35,16 @@
 
 }
 
-#nickname-condition {
-	font-size  : 12px;
-	text-align : left;
-	color      : #66625f;
-}
-
 #nickname_input {
 	width         : 90dvw;
 	height        : 6dvh;
 	color         : #181818;
 	border        : 1px solid #B3B3B3;
 	border-radius : 8px;
+}
+
+#nickname_input:focus {
+	outline : none;
 }
 
 #nickname_input::placeholder {
@@ -58,8 +56,7 @@
 #nickname_error {
 	font-size   : 12px;
 	font-weight : 600;
-	text-align  : center;
-	/*color       : var(--warning);*/
+	text-align  : left;
 	color       : #ed811e;
 }
 

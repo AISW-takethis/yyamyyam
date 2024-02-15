@@ -1,0 +1,138 @@
+
+#history_back {
+	display : inline-block;
+}
+
+#progress-bar {
+	position   : absolute;
+	width      : 100dvw;
+	height     : 4px;
+	top        : 6.6dvh;
+	padding    : 0;
+	margin     : 0;
+	appearance : none;
+}
+
+#progress-bar::-webkit-progress-bar {
+	background : #F3F3F3;
+}
+
+#progress-bar::-webkit-progress-value {
+	background : #009A6E;
+}
+
+.container {
+	overflow : hidden;
+}
+
+#gender_question {
+	position    : absolute;
+	top         : 16.8dvh;
+	margin-left : 5dvw;
+	font-size   : 18px;
+	font-weight : 600;
+	text-align  : left;
+	color       : #181818;
+}
+
+input[type=radio] {
+	display : none;
+}
+
+input[type=radio] + label {
+	position      : absolute;
+	width         : 42.3dvw;
+	height        : 5.7dvh;
+	display       : inline-block;
+	border        : 1px solid #B3B3B3;
+	border-radius : 6px;
+	color         : #B3B3B3;
+	font-size     : 14px;
+	text-align    : center;
+	line-height   : 5.7dvh;
+}
+
+input[type=radio]:checked + label {
+	border-color : #009A6E;
+	color        : #009A6E;
+}
+
+input[type=radio][id=radio_male] + label {
+	top  : 21.8dvh;
+	left : 5dvw;
+}
+
+input[type=radio][id=radio_female] + label {
+	top   : 21.8dvh;
+	right : 5dvw;
+}
+
+#birth_question {
+	position    : absolute;
+	top         : 31.3dvh;
+	margin-left : 5dvw;
+	font-size   : 18px;
+	font-weight : 600;
+	text-align  : left;
+	color       : #181818;
+}
+
+select {
+	height        : 6.1dvh;
+	outline       : none;
+	border-radius : 6px;
+	border-color  : #B3B3B3;
+	margin        : 0;
+	padding       : 3px;
+	display       : inline;
+}
+
+select option[value=""][disabled] {
+	display : none;
+}
+
+#date_selector {
+	position : absolute;
+	top      : 36.3dvh;
+	display  : flex;
+	width    : 100dvw;
+}
+
+select[id="year_input"] {
+	margin-left : 5dvw;
+	width       : 32dvw;
+}
+
+select[id="month_input"] {
+	margin-left  : auto;
+	margin-right : auto;
+	width        : 27dvw;
+}
+
+select[id="day_input"] {
+	margin-right : 5dvw;
+	width        : 27dvw;
+	float        : right;
+}
+
+#next_button {
+	width            : 90dvw;
+	height           : 6dvh;
+	position         : absolute;
+	background-color : #009A6E;
+	border           : none;
+	border-radius    : 8px;
+	top              : 86dvh;
+	left             : 50%;
+	margin-left      : -45dvw;
+}
+
+#next_button:disabled {
+	background-color : #DDDDDD;
+}
+
+#next_button-text {
+	font-size   : 16px;
+	font-weight : 600;
+	color       : white;
+}

@@ -1,0 +1,121 @@
+{#사용자 정보#}
+{% extends "user/user_base.html" %}
+{% load static %}
+{% block head %}
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_003.css' %}">
+{% endblock %}
+
+{% block header %}
+	기본정보 입력
+{% endblock %}
+
+{% block main %}
+	<progress id = "progress-bar" value = "40" max = "100"></progress>
+	<form class = "form" action = "{% url 'user:physical' %}" method = "post" name = "nickname_form">
+		{% csrf_token %}
+		<div class = "container">
+
+			<span id = "gender_question">성별은 무엇인가요?</span>
+			<input type = "radio" id = "radio_male" name = "gender" value = "1">
+			<label for = "radio_male" class = "radio_text">남성</label>
+			<input type = "radio" id = "radio_female" name = "gender" value = "2">
+			<label for = "radio_female" class = "radio_text">여성</label>
+
+			<span id = "birth_question">생년월일은 언제인가요?</span>
+			<div id = "date_selector">
+				<label for = "year_input"></label>
+				<select name = "year" id = "year_input">
+					<option value = "" disabled selected>년</option>
+					{% for i in "x"|rjust:"121" %}
+						<option value = "{{ forloop.counter|add:1899 }}">{{ forloop.counter|add:1899 }}</option>
+					{% endfor %}
+				</select>
+
+				<label for = "month_input"></label>
+				<select name = "month" id = "month_input">
+					<option value = "" disabled selected>월</option>
+					{% for i in "x"|rjust:"12" %}
+						<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+					{% endfor %}
+				</select>
+
+				<label for = "day_input"></label>
+				<select name = "day" id = "day_input">
+					<option value = "" disabled selected>일</option>
+					{% for i in "x"|rjust:"31" %}
+						<option value = "{{ forloop.counter }}">{{ forloop.counter }}</option>
+					{% endfor %}
+				</select>
+			</div>
+
+			<button id = "next_button" disabled = "disabled" type = "submit">
+				<span id = "next_button-text">다음</span>
+			</button>
+		</div>
+
+		{% if gender == 1 %}
+			<script type = "application/javascript">
+				document.querySelector('#radio_male').checked = true;
+				document.querySelector('#radio_female').checked = false;
+			</script>
+		{% elif gender == 2 %}
+			<script type = "application/javascript">
+				document.querySelector('#radio_male').checked = false;
+				document.querySelector('#radio_female').checked = true;
+			</script>
+		{% endif %}
+
+		{% if birth_year %}
+			<script type = "application/javascript">
+				document.querySelector('#year_input').value = {{ birth_year }};
+				document.querySelector('#month_input').value = {{ birth_month }};
+				document.querySelector('#day_input').value = {{ birth_day }};
+			</script>
+		{% endif %}
+
+		<script type = "application/javascript">
+			window.addEventListener("load", checkActivation);
+			
+			const maleInput = document.getElementById("radio_male");
+			const femaleInput = document.getElementById("radio_female");
+			const yearInput = document.getElementById("year_input");
+			const monthInput = document.getElementById("month_input");
+			const dayInput = document.getElementById("day_input");
+			const submitBtn = document.getElementById("next_button");
+
+			yearInput.addEventListener("input", updateDate);
+			monthInput.addEventListener("input", updateDate);
+			dayInput.addEventListener("input", updateDate);
+
+			// 모든 라디오 버튼과 select 요소들의 변경을 감지하기 위해 change 이벤트를 추가
+			[maleInput, femaleInput, yearInput, monthInput, dayInput].forEach(element => {
+				element.addEventListener("change", checkActivation);
+			});
+
+			function updateDate() {
+				const year = yearInput.value;
+				const month = monthInput.value.padStart(2, "0");
+				const day = dayInput.value.padStart(2, "0");
+
+				const dateValue = year + month + day;
+				console.log("Selected date: " + dateValue);
+			}
+
+			function checkActivation() {
+				// 모든 라디오 버튼과 select 요소들의 값이 존재하는지 확인
+				const genderSelected = maleInput.checked || femaleInput.checked;
+				const yearSelected = yearInput.value !== "";
+				const monthSelected = monthInput.value !== "";
+				const daySelected = dayInput.value !== "";
+
+				// 모든 요소가 선택되었을 때 버튼을 활성화
+				if (genderSelected && yearSelected && monthSelected && daySelected) {
+					submitBtn.disabled = false;
+				} else {
+					submitBtn.disabled = true;
+				}
+			}
+		</script>
+	</form>
+{% endblock %}

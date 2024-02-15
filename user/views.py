@@ -98,7 +98,7 @@ def welcome(request):
 
     try:
         user_context["gender"] = (
-            1 if context["kakao_account"]["gender"] == "male" else 0
+            1 if context["kakao_account"]["gender"] == "male" else 2
         )
     except:
         user_context["gender"] = 1
@@ -115,7 +115,8 @@ def welcome(request):
 
 
 def nickname(request):
-    return render(request, "user/FLW_INFO_002.html")
+    context = {"nickname": request.session["user_input"]["nickname"]}
+    return render(request, "user/FLW_INFO_002.html", context)
 
 
 def birth(request):
@@ -125,5 +126,21 @@ def birth(request):
     if user_context is not None:
         user_context["nickname"] = nickname
 
+    birthday = request.session["user_input"]["birth"]
+    birth_year = int(birthday[0:4])
+    birth_month = int(birthday[4:6])
+    birth_day = int(birthday[6:])
+
+    context = {
+        "gender": request.session["user_input"]["gender"],
+        "birth_year": birth_year,
+        "birth_month": birth_month,
+        "birth_day": birth_day,
+    }
+
     request.session["user_input"] = user_context
-    return render(request, "user/FLW_INFO_003.html")
+    return render(request, "user/FLW_INFO_003.html", context)
+
+
+def physical(request):
+    return render(request, "user/FLW_INFO_004.html")
