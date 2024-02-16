@@ -1,0 +1,15 @@
+main {
+    background-color: white
+}
+
+nav {
+    display: none;
+}
+
+.diet-add-image {
+    width: 300px;
+}
+
+.meal-memo {
+    background-color: var(--grayscale-06);
+}

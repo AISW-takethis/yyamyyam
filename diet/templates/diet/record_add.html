@@ -1,9 +1,148 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}식단 촬영{% endblock %}
-{% block css %}{% endblock css %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'diet/css/record_add.css' %}">
+{% endblock css %}
 {% block header %}식단 촬영{% endblock %}
 {% block main %}
-<h1>식단 촬영</h1>
-식단 촬영 페이지 입니다.
+{% include 'loading.html' %}
+<div class="container mt-3 px-4">
+
+    <div class="row align-items-center d-flex justify-content-between mb-3">
+        <div class="col align-items-center">
+            <span class="fs-4">2024.01.19</span> <span class="grayscale-02">오후 12:37</span>
+        </div>
+        <div class="col text-end grayscale-02">
+            다시 올리기
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-center">
+            <img src="{% static 'asset/food_image.png' %}" class="diet-add-image" alt="식단 사진" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-between">
+        <div class="col">
+            <h2>총 칼로리</h2>
+        </div>
+        <div class="col fs-5 text-end">
+            1000 Kcal
+        </div>
+    </div>
+    <div class="row">
+        <div class="col grayscale-02">
+            칼로리는 1회 제공량으로 측정됩니다.
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col grayscale-02">
+            수정을 원하시면 해당 항목을 선택해주세요.
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="d-flex align-items-center mt-2 summary-box py-3">
+                  <span class="nutrition-status badge bg-warning me-5"> 부족</span>
+                  <span class="grayscale-02">탄수화물 118g · 단백질 31g · 지방 22g</span>
+              </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <h2>식사 선택</h2>
+            <div class="row">
+                <div class="col">
+<!--                    back단에서 식사한 끼니를 제외하고 전달한다. -->
+                    <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+                    <label class="btn rounded-pill btn-outline-primary" for="option1">아침</label>
+
+                    <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+                    <label class="btn rounded-pill btn-outline-primary" for="option2">점심</label>
+
+                    <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off">
+                    <label class="btn rounded-pill btn-outline-primary" for="option3">저녁</label>
+
+                    <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off">
+                    <label class="btn rounded-pill btn-outline-primary" for="option4">간식</label>
+
+                    <input type="radio" class="btn-check" name="options" id="option5" autocomplete="off">
+                    <label class="btn rounded-pill btn-outline-primary" for="option4">야식</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="row d-flex justify-content-between align-items-center mb-1">
+                <div class="col">
+                    <h2>식단 상세</h2>
+                </div>
+                <div class="col text-end">
+                    <i class="fas fa-pen grayscale-02"></i>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <img src="{% static 'asset/image_plus.png'%}" class="" alt="아침 식사 이미지">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <img src="{% static 'asset/food_image.png' %}" class="" alt="아침 식사 이미지">
+                    </div>
+                    <div class="row justify-content-center">
+                        현미밥
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        <img src="{% static 'asset/food_image.png' %}" class="" alt="아침 식사 이미지">
+                    </div>
+                    <div class="row justify-content-center">
+                        된장국
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        <img src="{% static 'asset/food_image.png' %}" class="" alt="아침 식사 이미지">
+                    </div>
+                    <div class="row justify-content-center">
+                        잡곡밥
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <h2>식사메모</h2>
+            <div class="row">
+                <div class="col">
+                    <textarea class="form-control meal-memo" id="meal-memo" name="meal_memo" cols="50" rows="3">식사 소요시간 총 10분! 천천히 먹으려고 했는데 유튜브 보면서 먹다보니 조절이 아됐다! 다음에는 더 천천히 먹어야지!</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary rounded w-100 py-3">입력 완료</button>
+        </div>
+    </div>
+</div>
 {% endblock main %}
-{% block script %}{% endblock script %}
+{% block script %}
+<script src="{% static 'diet/js/record_add.js' %}"></script>
+{% endblock script %}

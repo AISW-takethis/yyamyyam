@@ -1,0 +1,48 @@
+
+main{
+    display: flex;
+}
+
+.container{
+    flex: 1;
+}
+
+.search-bar {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-clip: padding-box;
+    border: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.search-icon {
+display: flex;
+    align-items: center;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.list-group-flush > .list-group-item {
+    border-width: 0;
+}
+
+.button-bottom {
+    bottom: 10px !important;
+}
+
+form, .li {
+ padding: 0;
+}
