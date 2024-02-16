@@ -14,6 +14,7 @@ urlpatterns = [
     path("signup/info/nickname", views.nickname, name="nickname"),
     path("signup/info/birth", views.birth, name="birth"),
     path("signup/info/physical", views.physical, name="physical"),
-    # path("signup/info/activity", views.activity, name="activity"),
-    # path("signup/info/kcal", views.kcal, name="kcal"),
+    path("signup/info/activity", views.activity, name="activity"),
+    path("signup/info/kcal", views.kcal, name="kcal"),
+    path("signup/complete", views.complete, name="complete"),
 ]

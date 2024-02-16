@@ -49,9 +49,6 @@ def agreement(request):
     return render(request, "user/FLW_AG_001.html")
 
 
-# date = request.POST.getlist('agree[]')
-
-
 def age(request):
     return render(request, "user/agreements/popup.html")
 
@@ -69,14 +66,9 @@ def mc(request):
 
 
 def welcome(request):
-    # user_profile.user_id = request.user.id
     user_context = request.session.get("user_input", None)
 
     agrees = request.POST.getlist("agree[]", False)
-    # user_profile.agree_age_confirmation = "agree_age" in agrees
-    # user_profile.agree_terms_of_service = "agree_tos" in agrees
-    # user_profile.agree_privacy_policy = "agree_pp" in agrees
-    # user_profile.agree_marketing_consent = "agree_mc" in agrees
 
     if user_context is not None:
         user_context["age_confirmation"] = "agree_age" in agrees
@@ -143,4 +135,47 @@ def birth(request):
 
 
 def physical(request):
+    user_context = request.session.get("user_input", None)
+    gender = request.POST.get("gender", None)
+    year = request.POST.get("year_input", None)
+    month = request.POST.get("month_input", None)
+    day = request.POST.get("day_input", None)
+
+    if user_context is not None:
+        user_context["gender"] = gender
+        user_context["birth"] = str(year) + str(month) + str(day)
+
+    request.session["user_input"] = user_context
     return render(request, "user/FLW_INFO_004.html")
+
+
+def activity(request):
+    user_context = request.session.get("user_input", None)
+    height = request.POST.get("height_input", None)
+    weight = request.POST.get("weight_input", None)
+
+    if user_context is not None:
+        user_context["height"] = int(height)
+        user_context["weight"] = int(weight)
+
+    request.session["user_input"] = user_context
+    return render(request, "user/FLW_INFO_005.html")
+
+
+def kcal(request):
+    user_context = request.session.get("user_input", None)
+
+    if user_context is not None:
+        user_context["activity"] = request.POST.get("activity", None)
+
+    request.session["user_input"] = user_context
+    return render(request, "user/FLW_INFO_006.html")
+
+
+def complete(request):
+    # user_profile.user_id = request.user.id
+    # user_profile.agree_age_confirmation = "agree_age" in agrees
+    # user_profile.agree_terms_of_service = "agree_tos" in agrees
+    # user_profile.agree_privacy_policy = "agree_pp" in agrees
+    # user_profile.agree_marketing_consent = "agree_mc" in agrees
+    return redirect("diet:recommand_diet")
