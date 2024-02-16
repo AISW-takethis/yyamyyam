@@ -168,14 +168,25 @@ def kcal(request):
     if user_context is not None:
         user_context["activity"] = request.POST.get("activity", None)
 
+    gender = request.session["user_input"]["gender"]
+    weight = request.session["user_input"]["weight"]
+    age = request.session["user_input"]["birth"]
+
+    context = {
+        "nickname": request.session["user_input"]["nickname"],
+        # "kcal": request.session["user_input"]["kcal"],
+        # "percentage": request.session["user_input"]["kcal"],
+    }
+
     request.session["user_input"] = user_context
-    return render(request, "user/FLW_INFO_006.html")
+    return render(request, "user/FLW_INFO_006.html", context)
 
 
 def complete(request):
     # user_profile.user_id = request.user.id
-    # user_profile.agree_age_confirmation = "agree_age" in agrees
-    # user_profile.agree_terms_of_service = "agree_tos" in agrees
-    # user_profile.agree_privacy_policy = "agree_pp" in agrees
-    # user_profile.agree_marketing_consent = "agree_mc" in agrees
+    # user_profile.agree_age_confirmation =
+    # user_profile.agree_terms_of_service =
+    # user_profile.agree_privacy_policy =
+    # user_profile.agree_marketing_consent =
+    # user_profile.recommend_daily_calorie =
     return redirect("diet:recommand_diet")

@@ -22,7 +22,8 @@
 }
 
 .container {
-	overflow : hidden;
+	/*overflow : hidden;*/
+	height : 93dvh;
 }
 
 #kcal_main {
@@ -46,6 +47,45 @@
 	font-size  : 14px;
 	text-align : left;
 	color      : #66625f;
+}
+
+#rec_kcal_main {
+	position         : absolute;
+	width            : 30dvw;
+	height           : 6dvh;
+	top              : 46.1dvh;
+	left             : 50%;
+	transform        : translateX(-50%);
+	font-size        : 14px;
+	text-align       : center;
+	color            : #66625f;
+	background-color : white;
+}
+
+#rec_kcal_kcal {
+	font-size   : 20px;
+	font-weight : 600;
+	text-align  : center;
+	color       : #181818;
+}
+
+#rec_kcal_unit {
+	font-size  : 16px;
+	text-align : center;
+	color      : #181818;
+}
+
+#kcal_chart {
+	position  : absolute;
+	top       : 30dvh;
+	/*top       : 5dvh;*/
+	/*margin-top : 52.5dvh;*/
+	/*top       : 50%;*/
+	left      : 50%;
+	width     : 77dvw;
+	height    : 17.2dvh;
+	transform : translatex(-50%);
+	/*transform : translate(-50%, -50%);*/
 }
 
 #next_button {
