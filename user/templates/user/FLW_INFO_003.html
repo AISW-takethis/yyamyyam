@@ -75,8 +75,6 @@
 		{% endif %}
 
 		<script type = "application/javascript">
-			window.addEventListener("load", checkActivation);
-			
 			const maleInput = document.getElementById("radio_male");
 			const femaleInput = document.getElementById("radio_female");
 			const yearInput = document.getElementById("year_input");
@@ -84,6 +82,8 @@
 			const dayInput = document.getElementById("day_input");
 			const submitBtn = document.getElementById("next_button");
 
+			window.addEventListener("load", checkActivation);
+			
 			yearInput.addEventListener("input", updateDate);
 			monthInput.addEventListener("input", updateDate);
 			dayInput.addEventListener("input", updateDate);

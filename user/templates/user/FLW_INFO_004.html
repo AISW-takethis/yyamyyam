@@ -1,0 +1,56 @@
+{#사용자 정보#}
+{% extends "user/user_base.html" %}
+{% load static %}
+{% block head %}
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_004.css' %}">
+{% endblock %}
+
+{% block header %}
+	기본정보 입력
+{% endblock %}
+
+{% block main %}
+	<progress id = "progress-bar" value = "60" max = "100"></progress>
+	<form class = "form" action = "{% url 'user:activity' %}" method = "post" name = "nickname_form">
+		{% csrf_token %}
+		<div class = "container">
+
+			<span id = "physical_question">신체정보를 알려주세요</span>
+
+			<label for = "height_input" id = "height_input_label">키(cm)</label>
+			<input type = "number" id = "height_input" name = "height_input" placeholder = "190" min = "100" max = "300">
+
+			<label for = "weight_input" id = "weight_input_label">몸무게(kg)</label>
+			<input type = "number" id = "weight_input" name = "weight_input" placeholder = "100" min = "20" max = "200">
+
+			<button id = "next_button" disabled = "disabled" type = "submit">
+				<span id = "next_button-text">다음</span>
+			</button>
+		</div>
+
+		<script type = "application/javascript">
+			const heightInput = document.getElementById("height_input");
+			const weightInput = document.getElementById("weight_input");
+			const submitBtn = document.getElementById("next_button");
+
+			// 모든 요소들의 변경을 감지하기 위해 change 이벤트를 추가
+			[heightInput, weightInput].forEach(element => {
+				element.addEventListener("input", checkActivation);
+			});
+
+			function checkActivation() {
+				// 모든 요소들의 값이 존재하는지 확인
+				const heightEntered = heightInput.value !== "";
+				const weightEntered = weightInput.value !== "";
+
+				// 모든 요소가 선택되었을 때 버튼을 활성화
+				if (heightEntered && weightEntered) {
+					submitBtn.disabled = false;
+				} else {
+					submitBtn.disabled = true;
+				}
+			}
+		</script>
+	</form>
+{% endblock %}
