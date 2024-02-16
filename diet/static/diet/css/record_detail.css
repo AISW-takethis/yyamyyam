@@ -1,0 +1,15 @@
+main {
+    display: flex;
+}
+
+.pr-0 {
+    padding-right: 0 !important;
+}
+
+.pl-0 {
+    padding-left: 0 !important;
+}
+
+.detail-food-img{
+    width: 100%;
+}
