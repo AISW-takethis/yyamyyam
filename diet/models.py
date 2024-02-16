@@ -56,13 +56,8 @@ class DetailOfDiet(models.Model):
 class Food(models.Model):
     name = models.CharField(max_length=50, db_comment="음식 이름")
     description = models.CharField(max_length=200, db_comment="음식에 대한 설명")
-    image_path = models.CharField(max_length=100, db_comment="음식 이미지 경로")
     carbohydrate = models.FloatField(db_comment="1인분당 탄수화물")
     protein = models.FloatField(db_comment="1인분당 단백질")
     fat = models.FloatField(db_comment="1인분당 지방")
     calorie = models.FloatField(db_comment="1인분당 칼로리")
     is_main = models.BooleanField(default=False, db_comment="메인 음식 여부")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    deleted = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField(null=True, blank=True)

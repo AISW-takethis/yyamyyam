@@ -1,9 +1,29 @@
 from django.shortcuts import render
 
+from .models import Food
+
+# for test
+CALORIE_LIMIT = 2000
+MORNING = 1000
+LUNCH = 500
+DINNER = 0
+
 
 # Create your views here.
 def recommend(request):
-    return render(request, "diet/recommend.html", {})
+    # 잔여 칼로리
+    remaining_calorie = CALORIE_LIMIT - MORNING - LUNCH - DINNER
+
+    # 잔여 칼로리 이하의 음식 리스트, 랜덤 정렬해서 상위 3개 추출
+    food_list = Food.objects.filter(
+        calorie__lte=remaining_calorie, is_main=True
+    ).order_by("?")[:3]
+
+    # food의 name, description, image_path, calorie, carbohydrate, protein, fat 정보를 추출해서 프린트
+    for food in food_list:
+        food.calorie = int(round(food.calorie, 0))
+
+    return render(request, "diet/recommend.html", {"food_list": food_list})
 
 
 def record_list(request):

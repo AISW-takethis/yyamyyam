@@ -12,62 +12,61 @@
                 <img src="{% static 'asset/banner_recommend.jpeg' %}" alt="배너" class="banner"/>
         </div>
 
-
-
 <!--        콘텐츠 영역 -->
         <div class="container">
+<!--            새로 추천 버튼-->
             <div class="row mb-3">
                 <div class="column d-flex justify-content-end">
-                    <button class="btn btn-outline-primary">
+                    <button onclick="pageReload()" class="btn btn-outline-primary">
                         <i class="bi bi-arrow-clockwise"></i>
                         새로 추천
                     </button>
                 </div>
             </div>
-
     <!--        리스트 시작-->
             <div class="row border border-bottom-0 border-start-0 border-end-0 justify-content-center">
 <!--                아이템 반복문 시작 1-->
-                <div class="row border border-top-0 border-start-0 border-end-0 justify-content-center py-3">
-                    <div class="row py-3">
-                        <div class="col-5 text-center">
-                            <img src="{% static 'asset/food_image.png' %}" class="recom-food-img rounded-circle"/>
-                        </div>
-                        <div class="col-7">
-                            <div class="row p-0">
-                                <h2>보리밥</h2>
+                {% for food in food_list %}
+                    <div class="row border border-top-0 border-start-0 border-end-0 justify-content-center py-3">
+                        <div role="button" class="row py-3 expand">
+                            <div class="col-5 text-center">
+                                <img src="/static/asset/food_images/{{food.name}}.jpg" class="recom-food-img rounded-circle"/>
                             </div>
-                            <div class="row grayscale-02 mb-1 border border-start-0 border-end-0 border-top-0">
-                                <span>쌀에 보리를 섞어 식감이 좋고 영양이 풍부한 식단이에요.</span>
-                            </div>
-                            <div class="row d-flex justify-content-between">
-                                <div class="col-7">
-                                    영양성분 보기 <i class="bi bi-chevron-up"></i>
+                            <div class="col-7">
+                                <div class="row p-0">
+                                    <h2>{{food.name}}</h2>
                                 </div>
-                                <div class="col-5">
-                                    316 Kcal
+                                <div class="row grayscale-02 mb-1 border border-start-0 border-end-0 border-top-0">
+                                    <span>{{food.description}}</span>
+                                </div>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-7">
+                                        영양성분 보기 <i class="bi bi-chevron-down"></i>
+                                    </div>
+                                    <div class="col-5">
+                                        {{food.calorie}} Kcal
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-        <!--            숨김 처리되는 영역-->
-                    <div class="row justify-content-center">
-                        <div class="row mb-3">
-                            <div class="d-flex align-items-center mt-2 summary-box py-3">
-                                <span class="nutrition-status badge bg-warning me-5"> 부족</span>
-                                <span class="grayscale-02">탄수화물 118g · 단백질 31g · 지방 22g</span>
+            <!--            숨김 처리되는 영역-->
+                        <div class="row justify-content-center nutrition d-none">
+                            <div class="row mb-3">
+                                <div class="d-flex align-items-center mt-2 summary-box py-3">
+                                    <span class="nutrition-status badge bg-warning me-5"> 부족</span>
+                                    <span class="grayscale-02">탄수화물 {{food.carbohydrate}}g · 단백질 {{food.protein}}g · 지방 {{food.fat}}g</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <input type="button" class="btn btn-primary py-2" value="맞춤 식단 기록하기"/>
+                            <div class="row">
+                                <input type="button" class="btn btn-primary py-2" value="맞춤 식단 기록하기"/>
+                            </div>
                         </div>
                     </div>
-                </div>
+                {% endfor %}
+
             </div>
-
         </div>
-
     </div>
 {% endblock main %}
 {% block script %}
