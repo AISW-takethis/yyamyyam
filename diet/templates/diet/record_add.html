@@ -6,7 +6,9 @@
 {% endblock css %}
 {% block header %}식단 촬영{% endblock %}
 {% block main %}
+{% include 'loading.html' %}
 <div class="container mt-3 px-4">
+
     <div class="row align-items-center d-flex justify-content-between mb-3">
         <div class="col align-items-center">
             <span class="fs-4">2024.01.19</span> <span class="grayscale-02">오후 12:37</span>
@@ -18,7 +20,7 @@
 
     <div class="row mb-3">
         <div class="col d-flex justify-content-center">
-            <img src="{% static 'asset/food_image.png' %}" class="diet-add-image" alt="식단 사진">
+            <img src="{% static 'asset/food_image.png' %}" class="diet-add-image" alt="식단 사진" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         </div>
     </div>
 

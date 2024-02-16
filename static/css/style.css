@@ -7,7 +7,7 @@
     --grayscale-01: #181818;
     --grayscale-02: #66625f;
     --grayscale-03: #b3b3b3;
-    --grayscale-04: #dd;
+    --grayscale-04: #ddd;
     --grayscale-05: #f3f3f3;
     --grayscale-06: #fa;
     --error: #dd1d1d;
@@ -86,6 +86,7 @@ body, html {
     font-family: "Pretendard";
     font-size: 12px;
     color: var(--grayscale-01);
+
 }
 
 .mobile {
@@ -114,6 +115,13 @@ main {
     width: 100%;
     flex: 1;
     background-color: var(--grayscale-06);
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* for Chrome, Safari, Opera */
+main::-webkit-scrollbar {
+  display: none;
 }
 
 nav {
@@ -126,11 +134,12 @@ nav {
     border-top: 1px solid var(--grayscale-05);
 }
 
-nav div {
+nav a {
     display: grid;
     justify-items: center;
     color: var(--grayscale-03);
     font-size: 14px;
+    text-decoration-line: none;
 }
 
 .selected {
@@ -140,5 +149,37 @@ nav div {
 nav i {
     color: var(--grayscale-03);
     font-size: 20px;
+}
+
+.summary-box {
+    width: 100%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--grayscale-05);
+    border: 1px solid var(--grayscale-04);
+    border-radius: 10px;
+    color: var(--grayscale-01);
+    font-size: 20px;
+}
+
+.overlap-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+
+.spinner-border-lg{
+    width: 6rem;
+    height: 6rem;
 }
 
