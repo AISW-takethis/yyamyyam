@@ -18,11 +18,17 @@
 
 			<span id = "physical_question">신체정보를 알려주세요</span>
 
-			<label for = "height_input" id = "height_input_label">키(cm)</label>
-			<input type = "number" id = "height_input" name = "height_input" placeholder = "190" min = "100" max = "300">
+			<label for = "height_input" id = "height_input_label">키</label>
+			<div id = "height_input_container">
+				<input type = "number" id = "height_input" name = "height_input" placeholder = "190" min = "100" max = "300">
+				<span id = "height_input_unit">cm</span>
+			</div>
 
-			<label for = "weight_input" id = "weight_input_label">몸무게(kg)</label>
-			<input type = "number" id = "weight_input" name = "weight_input" placeholder = "100" min = "20" max = "200">
+			<label for = "weight_input" id = "weight_input_label">몸무게</label>
+			<div id = "weight_input_container">
+				<input type = "number" id = "weight_input" name = "weight_input" placeholder = "100" min = "20" max = "200">
+				<span id = "weight_input_unit">kg</span>
+			</div>
 
 			<button id = "next_button" disabled = "disabled" type = "submit">
 				<span id = "next_button-text">다음</span>
@@ -30,14 +36,43 @@
 		</div>
 
 		<script type = "application/javascript">
+			const heightInputContainer = document.getElementById("height_input_container");
 			const heightInput = document.getElementById("height_input");
+			const heightUnit = document.getElementById("height_input_unit");
+
+			const weightInputContainer = document.getElementById("weight_input_container");
 			const weightInput = document.getElementById("weight_input");
+			const weightUnit = document.getElementById("weight_input_unit");
+
 			const submitBtn = document.getElementById("next_button");
+
+			let heightFocused = false;
+			let weightFocused = false;
 
 			// 모든 요소들의 변경을 감지하기 위해 change 이벤트를 추가
 			[heightInput, weightInput].forEach(element => {
 				element.addEventListener("input", checkActivation);
 			});
+
+			heightInput.addEventListener("focus", function () {
+				heightFocused = true;
+				checkActivation();
+			})
+
+			heightInput.addEventListener("blur", function () {
+				heightFocused = false;
+				checkActivation();
+			})
+
+			weightInputContainer.addEventListener("focus", function () {
+				weightFocused = true;
+				checkActivation();
+			})
+
+			weightInputContainer.addEventListener("blur", function () {
+				weightFocused = false;
+				checkActivation();
+			})
 
 			function checkActivation() {
 				// 모든 요소들의 값이 존재하는지 확인
@@ -45,10 +80,22 @@
 				const weightEntered = weightInput.value !== "";
 
 				// 모든 요소가 선택되었을 때 버튼을 활성화
-				if (heightEntered && weightEntered) {
-					submitBtn.disabled = false;
+				submitBtn.disabled = !(heightEntered && weightEntered);
+
+				if (heightFocused) {
+					heightUnit.style.color = "#009A6E"
+				} else if (heightEntered && !heightFocused) {
+					heightUnit.style.color = "#181818"
 				} else {
-					submitBtn.disabled = true;
+					heightUnit.style.color = "#B3B3B3"
+				}
+
+				if (weightFocused) {
+					weightUnit.style.color = "#009A6E"
+				} else if (weightEntered && !weightFocused) {
+					weightUnit.style.color = "#181818"
+				} else {
+					weightUnit.style.color = "#B3B3B3"
 				}
 			}
 		</script>

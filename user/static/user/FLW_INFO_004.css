@@ -59,18 +59,46 @@
 	border     : 1px solid transparent;
 }
 
-#height_input {
+#height_input_container {
 	position      : absolute;
 	top           : 24.9dvh;
 	left          : 5dvw;
 	width         : 40.3dvw;
 	height        : 6dvh;
 	padding       : 0 0 0 2dvw;
-	font-size     : 12px;
-	text-align    : left;
 	border        : 1px solid #B3B3B3;
 	border-radius : 6px;
 	color         : #181818;
+}
+
+#height_input_unit {
+	position  : absolute;
+	right     : 2dvw;
+	top       : 50%;
+	transform : translateY(-50%);
+	font-size : 12px;
+	color     : #B3B3B3;
+}
+
+#height_input {
+	position   : absolute;
+	width      : calc(100% - 4dvw);
+	height     : 99%;
+	padding    : 0;
+	font-size  : 12px;
+	text-align : left;
+	top        : 50%;
+	transform  : translateY(-50%);
+	border     : none;
+	color      : #181818;
+}
+
+#height_input_container:focus-within {
+	border-color : #009A6E;
+}
+
+#height_input_container:focus-within #height_input_unit {
+	color : #009A6E;
 }
 
 #height_input:focus {
@@ -79,27 +107,51 @@
 	color        : #009A6E;
 }
 
-#height_input::placeholder {
-}
-
-#weight_input {
+#weight_input_container {
 	position      : absolute;
 	top           : 24.9dvh;
 	right         : 5dvw;
 	width         : 40.3dvw;
 	height        : 6dvh;
 	padding       : 0 0 0 2dvw;
-	font-size     : 12px;
-	text-align    : left;
 	border        : 1px solid #B3B3B3;
 	border-radius : 6px;
 	color         : #181818;
 }
 
-#weight_input:focus {
-	outline      : none;
+#weight_input_unit {
+	position  : absolute;
+	right     : 2dvw;
+	top       : 50%;
+	transform : translateY(-50%);
+	font-size : 12px;
+	color     : #B3B3B3;
+}
+
+#weight_input {
+	position   : absolute;
+	width      : calc(100% - 4dvw);
+	height     : 99%;
+	padding    : 0;
+	font-size  : 12px;
+	text-align : left;
+	top        : 50%;
+	transform  : translateY(-50%);
+	border     : none;
+	color      : #181818;
+}
+
+#weight_input_container:focus-within {
 	border-color : #009A6E;
-	color        : #009A6E;
+}
+
+#weight_input_container:focus-within #weight_input_unit {
+	color : #009A6E;
+}
+
+#weight_input:focus {
+	outline : none;
+	color   : #009A6E;
 }
 
 #next_button {
