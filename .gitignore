@@ -446,3 +446,4 @@ fabric.properties
 # mksoo images
 /static/asset/food_images/
 foods.csv
+/static/asset/user_food/

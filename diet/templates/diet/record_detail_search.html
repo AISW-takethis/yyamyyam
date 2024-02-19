@@ -6,32 +6,26 @@
 {% endblock css %}
 {% block header %}식단 검색{% endblock %}
 {% block main %}
-
     <div class="container d-flex flex-column px-4">
         <div class="row my-5">
-            <form class="border d-flex py-2 rounded border-primary">
-                <input type="search" class="search-bar" placeholder="음식명을 입력해주세요" aria-label="Search" aria-describedby="search-addon" />
+            <form class="border d-flex py-2 rounded border-primary" id="search-form">
+                <input type="search" class="search-bar" id="search-bar" placeholder="음식명을 입력해주세요" aria-label="Search" aria-describedby="search-addon" />
                 <span class="search-icon" id="search-addon">
-                <i class="fas fa-search"></i>
-              </span>
+                    <i class="fas fa-search"></i>
+                </span>
             </form>
         </div>
 
         <div class="row d-flex flex-fill">
             <form class="flex-fill d-flex flex-column">
-                <ul class="list-group list-group-flush">
-                    {% for item in item_list %}
-                        <li class="list-group-item">
-                            <input class="form-check-input me-1" type="radio" name="listGroupRadio" value="" id="item-'{{ item }}'">
-                            <label class="form-check-label" for="item-'{{ item }}'">Item {{ item }}</label>
-                        </li>
-                    {% endfor %}
+                <ul id="list-group" class="list-group list-group-flush">
+
                 </ul>
 
                 <div class="flex-fill"></div>
 
                 <div class="d-grid gap-2">
-                    <input type="submit" class="btn btn-primary mb-3" value="수정하기"/>
+                    <input type="button" id="btn-confirm" class="btn btn-primary mb-3" value="확인"/>
                 </div>
 
             </form>

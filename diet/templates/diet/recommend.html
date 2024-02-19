@@ -11,8 +11,7 @@
         <div class="row mb-3">
                 <img src="{% static 'asset/banner_recommend.jpeg' %}" alt="배너" class="banner"/>
         </div>
-
-<!--        콘텐츠 영역 -->
+        <!--  콘텐츠 영역 -->
         <div class="container">
 <!--            새로 추천 버튼-->
             <div class="row mb-3">
@@ -59,7 +58,7 @@
                             </div>
 
                             <div class="row">
-                                <input type="button" class="btn btn-primary py-2" value="맞춤 식단 기록하기"/>
+                                <a href="{% url 'diet:record_add_with_recommend' food.id %} " type="button" class="btn btn-primary py-2">맞춤 식단 기록하기</a>
                             </div>
                         </div>
                     </div>
