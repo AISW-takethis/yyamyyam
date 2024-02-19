@@ -1,15 +1,18 @@
 {#약관 동의#}
+{% extends "user/user_base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang = "ko-KR">
-<head>
-	<meta charset = "UTF-8">
-	<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+
+{% block head %}
 	<title>agreement</title>
 	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_AG_001.css' %}">
 	<script type = "text/javascript" src = "{% static 'user/FLW_AG_001.js' %}"></script>
-</head>
-<body>
+{% endblock %}
+
+{% block header %}
+	이용약관 동의
+{% endblock %}
+
+{% block main %}
 	<form class = "form" action = "{% url 'user:welcome' %}" method = "post" name = "agreement_form">
 		{% csrf_token %}
 		<div class = "container">
@@ -24,46 +27,37 @@
 			</div>
 
 			<div id = "agreement-item-container">
-
 				<div class = "div-checkbox">
-					<input type = "checkbox" id = "agree_age" name = "agree[]" value = "agree_age"/>
+					<input type = "checkbox" id = "agree_age" name = "agree[]" onclick = "check_essential()" value = "agree_age"/>
 					<label class = "agree-label" for = "agree_age">
-						<button class = "agreement-item" onclick = "popup_age()">
-							<span>[필수] 만 14세 이상 확인</span>
-							<img src = "{% static 'user/images/agreement_detail_button.svg' %}" class = "agreement-item-image" alt = "">
-						</button>
+						<span class = "agreement-item-text">[필수] 만 14세 이상 확인</span>
 					</label>
+					<span class = "agreement-item-image" onclick = "popup_age()">보기</span>
 				</div>
 				<div class = "div-checkbox">
-					<input type = "checkbox" id = "agree_tos" name = "agree[]" value = "agree_tos"/>
+					<input type = "checkbox" id = "agree_tos" name = "agree[]" onclick = "check_essential()" value = "agree_tos"/>
 					<label class = "agree-label" for = "agree_tos">
-						<button class = "agreement-item" onclick = "popup_tos()">
-							<span>[필수] 서비스 이용약관 동의</span>
-							<img src = "{% static 'user/images/agreement_detail_button.svg' %}" class = "agreement-item-image" alt = "">
-						</button>
+						<span class = "agreement-item-text">[필수] 서비스 이용약관 동의</span>
 					</label>
+					<span class = "agreement-item-image" onclick = "popup_tos()">보기</span>
 				</div>
 				<div class = "div-checkbox">
-					<input type = "checkbox" id = "agree_pp" name = "agree[]" value = "agree_pp"/>
+					<input type = "checkbox" id = "agree_pp" name = "agree[]" onclick = "check_essential()" value = "agree_pp"/>
 					<label class = "agree-label" for = "agree_pp">
-						<button class = "agreement-item" onclick = "popup_pp()">
-							<span>[필수] 개인정보 처리방침 동의</span>
-							<img src = "{% static 'user/images/agreement_detail_button.svg' %}" class = "agreement-item-image" alt = "">
-						</button>
+						<span class = "agreement-item-text">[필수] 개인정보 처리방침 동의</span>
 					</label>
+					<span class = "agreement-item-image" onclick = "popup_pp()">보기</span>
 				</div>
 				<div class = "div-checkbox">
 					<input type = "checkbox" id = "agree_mc" name = "agree[]" value = "agree_mc"/>
 					<label class = "agree-label" for = "agree_mc">
-						<button class = "agreement-item" onclick = "popup_mc()">
-							<span>[선택] 마케팅 수신 동의</span>
-							<img src = "{% static 'user/images/agreement_detail_button.svg' %}" class = "agreement-item-image" alt = "">
-						</button>
+						<span class = "agreement-item-text">[선택] 마케팅 수신 동의</span>
 					</label>
+					<span class = "agreement-item-image" onclick = "popup_mc()">보기</span>
 				</div>
 			</div>
 
-			<button id = "agreement-button" type = "submit" onclick = "check_essential()">
+			<button id = "agreement_button" disabled = "disabled" type = "submit">
 				<span id = "agreement-button-text">동의 완료하고 계속하기</span>
 			</button>
 		</div>
@@ -87,6 +81,7 @@
 						checkbox.checked = false;
 					}
 				}
+				check_essential()
 			})
 
 			const checkboxes = document.querySelectorAll('input[name="agree[]"]');
@@ -103,21 +98,5 @@
 			}
 		</script>
 
-		{#<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image" alt="">#}
-
 	</form>
-</body>
-</html>
-
-{% comment %}
-<form class = "form" action = "{% url 'appMain:predict' %}" method = "post">
-	{% csrf_token %}
-	<div class = "container">
-		<label id = "promptInputLabel" for = "promptInput">Stable Diffusion 모델 활용을 위해 영어로 프롬프트를 입력해 주세요 </label>
-		<div id = "prompt-input">
-			<input type = "text" id = "promptInput" placeholder = "Type your prompt here!" oninput = "handleOnInput(this)" name = "prompt" value = "{{ prompt }}" autofocus>
-			<button type = "submit" id = "promptSubmit" value = "submit prompt">submit prompt</button>
-		</div>
-	</div>
-</form>
-{% endcomment %}
+{% endblock %}

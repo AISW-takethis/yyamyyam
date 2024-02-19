@@ -1,16 +1,17 @@
 {#온보딩 - 로그인#}
+{% extends "user/user_base.html" %}
 {% load static %}
 {% load socialaccount %}
-<!DOCTYPE html>
-<html lang = "ko-KR">
-<head>
-	<meta charset = "UTF-8">
-	<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+
+{% block head %}
 	<title>OB-login</title>
 	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_OB_001.css' %}">
-</head>
-<body>
+{% endblock %}
 
+{% block header %}
+{% endblock %}
+
+{% block main %}
 	<div class = "intro">
 		<p>
 			<span class = "intro-main">건강 고민 끝,</span>
@@ -30,6 +31,4 @@
 	</form>
 
 	<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image">
-
-</body>
-</html>
+{% endblock %}

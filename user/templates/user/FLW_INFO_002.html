@@ -1,0 +1,60 @@
+{#사용자 정보#}
+{% extends "user/user_base.html" %}
+{% load static %}
+{% block head %}
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_002.css' %}">
+{% endblock %}
+
+{% block header %}
+	기본정보 입력
+{% endblock %}
+
+{% block main %}
+	<progress id = "progress-bar" value = "20" max = "100"></progress>
+	<form class = "form" action = "{% url 'user:birth' %}" method = "post" name = "nickname_form">
+		{% csrf_token %}
+		<div class = "container">
+
+			<p id = "nickname-main">
+				<span>냠냠에서 사용할</span>
+				<br/>
+				<span>닉네임을 입력해주세요</span>
+			</p>
+
+			<label for = "nickname_input"></label>
+			<input type = "text" id = "nickname_input" placeholder = "문자 2자 이상 (숫자 혼용 가능)" name = "nickname_input" value = "{{ nickname }}" {% comment %}autofocus{% endcomment %}>
+
+			<p id = "nickname_error"></p>
+
+			<button id = "next_button" disabled = "disabled" type = "submit">
+				<span id = "next_button-text">다음</span>
+			</button>
+		</div>
+
+		<script type = "application/javascript">
+			window.addEventListener("load", checkValidation);
+			
+			nickname_input.oninput = checkValidation
+			nickname_input.onfocus = checkValidation
+			nickname_input.onblur = outFocused
+
+			function checkValidation() {
+				{#nickname_error.innerHTML = nickname_input.value;#}
+				if (!/^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/.test(nickname_input.value)) {
+					next_button.disabled = true
+					nickname_error.innerHTML = "닉네임은 2-10자리의 한글, 영문, 숫자만 가능합니다."
+					nickname_input.style.borderColor = "#ed811e"
+				} else {
+					next_button.disabled = false
+					nickname_error.innerHTML = ""
+					nickname_input.style.borderColor = "#009A6E"
+				}
+			}
+
+			function outFocused() {
+				nickname_input.style.borderColor = "#B3B3B3"
+			}
+		</script>
+	</form>
+{% endblock %}

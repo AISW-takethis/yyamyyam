@@ -1,0 +1,71 @@
+{#사용자 정보#}
+{% extends "user/user_base.html" %}
+{% load static %}
+{% block head %}
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_005.css' %}">
+{% endblock %}
+
+{% block header %}
+	기본정보 입력
+{% endblock %}
+
+{% block main %}
+	<progress id = "progress-bar" value = "80" max = "100"></progress>
+	<form class = "form" action = "{% url 'user:kcal' %}" method = "post" name = "nickname_form">
+		{% csrf_token %}
+		<div class = "container">
+
+			<span id = "activity_question">활동 수준이 어떻게 되시나요?</span>
+
+			<input type = "radio" id = "radio_activity_4" name = "activity" value = "4">
+			<label for = "radio_activity_4" class = "radio_text">
+				<span class = "radio_activity_label_main">멈추지 않고 움직여요<br>
+				<span class = "radio_activity_label_sub">거의 매일 빠지지 않고 운동해요</span></span>
+			</label>
+
+			<input type = "radio" id = "radio_activity_3" name = "activity" value = "3">
+			<label for = "radio_activity_3" class = "radio_text">
+				<span class = "radio_activity_label_main">꾸준히 운동해요<br>
+				<span class = "radio_activity_label_sub">일주일에 3~5회씩 꾸준히 운동해요</span></span>
+			</label>
+
+			<input type = "radio" id = "radio_activity_2" name = "activity" value = "2">
+			<label for = "radio_activity_2" class = "radio_text">
+				<span class = "radio_activity_label_main">가볍게 활동해요<br>
+				<span class = "radio_activity_label_sub">일주일에 1~2회씩 가볍게 운동해요</span></span>
+			</label>
+
+			<input type = "radio" id = "radio_activity_1" name = "activity" value = "1">
+			<label for = "radio_activity_1" class = "radio_text">
+				<span class = "radio_activity_label_main">대부분 앉아서 생활해요<br>
+				<span class = "radio_activity_label_sub">운동을 거의 하지 않고 많이 움직이지 않아요</span></span>
+			</label>
+
+			<button id = "next_button" disabled = "disabled" type = "submit">
+				<span id = "next_button-text">다음</span>
+			</button>
+		</div>
+
+		<script type = "application/javascript">
+			const activityInput4 = document.getElementById("radio_activity_4");
+			const activityInput3 = document.getElementById("radio_activity_3");
+			const activityInput2 = document.getElementById("radio_activity_2");
+			const activityInput1 = document.getElementById("radio_activity_1");
+			const submitBtn = document.getElementById("next_button");
+
+			// 모든 요소들의 변경을 감지하기 위해 change 이벤트를 추가
+			[activityInput4, activityInput3, activityInput2, activityInput1].forEach(element => {
+				element.addEventListener("change", checkActivation);
+			});
+
+			function checkActivation() {
+				// 모든 요소들의 값이 존재하는지 확인
+				const activitySelected = activityInput4.checked || activityInput3.checked || activityInput2.checked || activityInput1.checked;
+
+				// 모든 요소가 선택되었을 때 버튼을 활성화
+				submitBtn.disabled = !activitySelected;
+			}
+		</script>
+	</form>
+{% endblock %}

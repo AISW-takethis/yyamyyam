@@ -1,0 +1,44 @@
+{
+  "id": 3331446779,
+  "properties": {
+    "nickname": "황승현"
+  },
+  "connected_at": "2024-02-06T07:08:46Z",
+  "kakao_account": {
+    "email": "dragonray@naver.com",
+    "gender": "male",
+    "profile": {
+      "nickname": "황승현"
+    },
+    "birthday": "0627",
+    "birthyear": "2000",
+    "has_email": true,
+    "has_gender": true,
+    "has_birthday": true,
+    "birthday_type": "SOLAR",
+    "has_birthyear": true,
+    "is_email_valid": true,
+    "is_email_verified": true,
+    "email_needs_agreement": false,
+    "gender_needs_agreement": false,
+    "birthday_needs_agreement": false,
+    "birthyear_needs_agreement": false,
+    "profile_nickname_needs_agreement": false
+  },
+  "id": 3331446779,
+  "connected_at": "2024-02-12T12:18:11Z",
+  "kakao_account": {
+    "email": "dragonray@naver.com",
+    "has_email": true,
+    "has_gender": true,
+    "has_birthday": true,
+    "has_birthyear": true,
+    "is_email_valid": true,
+    "is_email_verified": true,
+    "email_needs_agreement": false,
+    "gender_needs_agreement": true,
+    "birthday_needs_agreement": true,
+    "birthyear_needs_agreement": true,
+    "profile_nickname_needs_agreement": false
+  }
+}

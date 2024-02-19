@@ -1,0 +1,120 @@
+
+#history_back {
+	display : inline-block;
+}
+
+#progress-bar {
+	position   : absolute;
+	width      : 100dvw;
+	height     : 4px;
+	top        : 6.6dvh;
+	padding    : 0;
+	margin     : 0;
+	appearance : none;
+}
+
+#progress-bar::-webkit-progress-bar {
+	background : #F3F3F3;
+}
+
+#progress-bar::-webkit-progress-value {
+	background : #009A6E;
+}
+
+.container {
+	overflow : hidden;
+}
+
+#activity_question {
+	position    : absolute;
+	top         : 16.8dvh;
+	margin-left : 5dvw;
+	font-size   : 18px;
+	font-weight : 600;
+	text-align  : left;
+	color       : #181818;
+}
+
+input[type=radio] {
+	display : none;
+}
+
+input[type=radio] + label {
+	position      : absolute;
+	width         : 90dvw;
+	height        : 8dvh;
+	/*display       : inline-block;*/
+	border        : 1px solid #B3B3B3;
+	border-radius : 6px;
+	padding       : 0;
+}
+
+input[type=radio]:checked + label {
+	border-color : #009A6E;
+}
+
+input[type=radio]:checked + label .radio_activity_label_main,
+input[type=radio]:checked + label .radio_activity_label_sub {
+	border-color : #009A6E;
+	color        : #009A6E;
+}
+
+.radio_text {
+	position : relative;
+}
+
+.radio_activity_label_main {
+	position    : absolute;
+	top         : 50%;
+	margin-left : 5dvw;
+	transform   : translateY(-50%);
+	color       : #181818;
+	font-size   : 14px;
+}
+
+.radio_activity_label_sub {
+	font-size : 12px;
+	color     : #66625F;
+}
+
+input[type=radio][id=radio_activity_4] + label {
+	top  : 21.8dvh;
+	left : 5dvw;
+}
+
+input[type=radio][id=radio_activity_3] + label {
+	top  : 30.8dvh;
+	left : 5dvw;
+}
+
+input[type=radio][id=radio_activity_2] + label {
+	top  : 39.8dvh;
+	left : 5dvw;
+}
+
+input[type=radio][id=radio_activity_1] + label {
+	top  : 48.8dvh;
+	left : 5dvw;
+}
+
+#next_button {
+	width            : 90dvw;
+	height           : 6dvh;
+	position         : absolute;
+	background-color : #009A6E;
+	border           : none;
+	border-radius    : 8px;
+	top              : 86dvh;
+	left             : 50%;
+	margin-left      : -45dvw;
+}
+
+#next_button:disabled {
+	background-color : #DDDDDD;
+}
+
+#next_button-text {
+	font-size   : 16px;
+	font-weight : 600;
+	color       : white;
+}

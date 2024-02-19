@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang = "ko-KR">
+<head>
+	<meta charset = "UTF-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1, user-scalable=0, viewport-fit=cover">
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/base.css' %}">
+	{% block head %}
+	{% endblock %}
+</head>
+<body>
+	<header>
+		<img src = "{% static 'user/images/history_back.svg' %}" id = "history_back" onclick = "history.back()">
+		<span class = "header-text">
+			{% block header %}
+			{% endblock %}
+		</span>
+	</header>
+	<main>
+		{% block main %}
+		{% endblock %}
+	</main>
+</body>
+</html>

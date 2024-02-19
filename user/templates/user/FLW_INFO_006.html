@@ -1,0 +1,78 @@
+{#사용자 정보#}
+{% extends "user/user_base.html" %}
+{% load static %}
+{% block head %}
+	<title>agreement</title>
+	<link rel = "stylesheet" type = "text/css" href = "{% static 'user/FLW_INFO_006.css' %}">
+	<!-- Load D3.js -->
+	<script src = "https://d3js.org/d3.v4.min.js"></script>
+	<!-- Load billboard.js with style -->
+	<script src = "{% static 'js/billboard.js' %}"></script>
+	<link rel = "stylesheet" href = "{% static 'css/billboard.css' %}">
+{% endblock %}
+
+{% block header %}
+	기본정보 입력
+{% endblock %}
+
+{% block main %}
+	<progress id = "progress-bar" value = "100" max = "100"></progress>
+	<form class = "form" action = "{% url 'user:complete' %}" method = "post" name = "nickname_form">
+		{% csrf_token %}
+		<div class = "container">
+
+			<span id = "kcal_main"><span id = "kcal_main_nickname">{{ nickname|default:"닉네임" }}</span>님을 위한 맞춤 진단!</span>
+
+			<span id = "kcal_sub">몸무게, 키, 나이, 운동량 등을 고려하여<br>계산한 목표 달성 지표입니다.</span>
+
+			<div id = "kcal_chart"></div>
+
+			<span id = "rec_kcal_main">하루 권장 칼로리<br>
+				<span id = "rec_kcal_kcal">{{ kcal|default:"NaN" }}</span>
+				<span id = "rec_kcal_unit"> kcal</span>
+			</span>
+
+			<button id = "next_button" type = "submit">
+				<span id = "next_button-text">완료</span>
+			</button>
+		</div>
+
+		<script>
+			var chart = bb.generate({
+				bindto: "#kcal_chart",
+				data: {
+					type: "gauge",
+					columns: [
+						["data1", {{ percentage|default:0 }}]
+					],
+					colors: {
+						data1: "#009A6E"
+					}
+				},
+				gauge: {
+					{#arcLength: 70,#}
+					{#fullCircle: true,#}
+					fullCircle: false,
+					label: {
+						extents: function () {
+							return "";
+						}
+					},
+					{#startingAngle: -2.2,#}
+					width: 10
+				},
+				legend: {
+					show: false,
+					hide: "data1",
+					tooltip: false,
+					usePoint: false,
+					equally: false,
+					item: {
+						interaction: false
+					}
+				},
+			});
+
+		</script>
+	</form>
+{% endblock %}
