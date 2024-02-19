@@ -98,20 +98,5 @@
 			}
 		</script>
 
-		{#<img src = "{% static 'user/images/login_background.svg' %}" id = "login_background_image" alt="">#}
-
 	</form>
 {% endblock %}
-
-{% comment %}
-<form class = "form" action = "{% url 'appMain:predict' %}" method = "post">
-	{% csrf_token %}
-	<div class = "container">
-		<label id = "promptInputLabel" for = "promptInput">Stable Diffusion 모델 활용을 위해 영어로 프롬프트를 입력해 주세요 </label>
-		<div id = "prompt-input">
-			<input type = "text" id = "promptInput" placeholder = "Type your prompt here!" oninput = "handleOnInput(this)" name = "prompt" value = "{{ prompt }}" autofocus>
-			<button type = "submit" id = "promptSubmit" value = "submit prompt">submit prompt</button>
-		</div>
-	</div>
-</form>
-{% endcomment %}

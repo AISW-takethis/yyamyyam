@@ -19,26 +19,23 @@ gender_female = 2
 
 
 # Create your views here.
-def index(request):
+def splash(request):
 	return render(request, "user/FLW_SP_001.html")
 
 
 def login(request):
-	# if request.user.is_authenticated:
-	#     return redirect("diet:recommend_diet")
+	if request.user.is_authenticated:
+		return redirect("diet:recommend_diet")
 	return render(request, "user/FLW_OB_001.html")
 
 
 def agreement(request):
 	# 기존 가입자라면 홈으로 redirect
-	# if request.user.is_authenticated:
-	#     # request.user.id
-	#     if UserProfile.objects.filter(user_id=request.user.id).exists():
-	#         return redirect("diet:recommend_diet")
-	# TODO 모든 웹페이지에서 로그인되어있지 않은 상태라면 스플래시 화면으로 리다이텍트
-	
-	# 신규 가입자라면 동의 페이지 렌더
-	# 세션으로 동의 유지
+	if request.user.is_authenticated:
+		if UserProfile.objects.filter(user_id = request.user.id).exists():
+			return redirect("diet:recommend_diet")
+	else:
+		return redirect("user:splash")
 	
 	context = {
 		"age_confirmation": False,
@@ -69,6 +66,8 @@ def mc(request):
 
 
 def welcome(request):
+	if not request.user.is_authenticated:
+		return redirect("user:splash")
 	user_context = request.session.get("user_input", None)
 	
 	agrees = request.POST.getlist("agree[]", False)
@@ -108,11 +107,15 @@ def welcome(request):
 
 
 def nickname(request):
+	if not request.user.is_authenticated:
+		return redirect("user:splash")
 	context = {"nickname": request.session["user_input"]["nickname"]}
 	return render(request, "user/FLW_INFO_002.html", context)
 
 
 def birth(request):
+	if not request.user.is_authenticated:
+		return redirect("user:splash")
 	user_context = request.session.get("user_input", None)
 	nickname = request.POST.get("nickname_input", None)
 	
@@ -136,6 +139,8 @@ def birth(request):
 
 
 def physical(request):
+	if not request.user.is_authenticated:
+		return redirect("user:splash")
 	user_context = request.session.get("user_input", None)
 	gender = request.POST.get("gender", None)
 	year = request.POST.get("year", None)
@@ -151,6 +156,8 @@ def physical(request):
 
 
 def activity(request):
+	if not request.user.is_authenticated:
+		return redirect("user:splash")
 	user_context = request.session.get("user_input", None)
 	height = request.POST.get("height_input", None)
 	weight = request.POST.get("weight_input", None)
@@ -165,6 +172,9 @@ def activity(request):
 
 def kcal(request):
 	from datetime import datetime
+	
+	if not request.user.is_authenticated:
+		return redirect("user:splash")
 	
 	user_context = request.session.get("user_input", None)
 	
@@ -211,7 +221,8 @@ def kcal(request):
 
 
 def complete(request):
-	print(request.session["user_input"])
+	if not request.user.is_authenticated:
+		return redirect("user:splash")
 	
 	user_profile.user_id = request.user.id
 	user_profile.agree_age_confirmation = request.session["user_input"]["age_confirmation"]
