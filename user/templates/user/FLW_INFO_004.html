@@ -36,43 +36,18 @@
 		</div>
 
 		<script type = "application/javascript">
-			const heightInputContainer = document.getElementById("height_input_container");
 			const heightInput = document.getElementById("height_input");
 			const heightUnit = document.getElementById("height_input_unit");
 
-			const weightInputContainer = document.getElementById("weight_input_container");
 			const weightInput = document.getElementById("weight_input");
 			const weightUnit = document.getElementById("weight_input_unit");
 
 			const submitBtn = document.getElementById("next_button");
 
-			let heightFocused = false;
-			let weightFocused = false;
-
 			// 모든 요소들의 변경을 감지하기 위해 change 이벤트를 추가
 			[heightInput, weightInput].forEach(element => {
 				element.addEventListener("input", checkActivation);
 			});
-
-			heightInput.addEventListener("focus", function () {
-				heightFocused = true;
-				checkActivation();
-			})
-
-			heightInput.addEventListener("blur", function () {
-				heightFocused = false;
-				checkActivation();
-			})
-
-			weightInputContainer.addEventListener("focus", function () {
-				weightFocused = true;
-				checkActivation();
-			})
-
-			weightInputContainer.addEventListener("blur", function () {
-				weightFocused = false;
-				checkActivation();
-			})
 
 			function checkActivation() {
 				// 모든 요소들의 값이 존재하는지 확인
@@ -82,17 +57,13 @@
 				// 모든 요소가 선택되었을 때 버튼을 활성화
 				submitBtn.disabled = !(heightEntered && weightEntered);
 
-				if (heightFocused) {
-					heightUnit.style.color = "#009A6E"
-				} else if (heightEntered && !heightFocused) {
+				if (heightEntered) {
 					heightUnit.style.color = "#181818"
 				} else {
 					heightUnit.style.color = "#B3B3B3"
 				}
 
-				if (weightFocused) {
-					weightUnit.style.color = "#009A6E"
-				} else if (weightEntered && !weightFocused) {
+				if (weightEntered) {
 					weightUnit.style.color = "#181818"
 				} else {
 					weightUnit.style.color = "#B3B3B3"

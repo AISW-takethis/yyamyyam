@@ -97,14 +97,9 @@
 	border-color : #009A6E;
 }
 
-#height_input_container:focus-within #height_input_unit {
-	color : #009A6E;
-}
-
 #height_input:focus {
 	outline      : none;
 	border-color : #009A6E;
-	color        : #009A6E;
 }
 
 #weight_input_container {
@@ -145,13 +140,8 @@
 	border-color : #009A6E;
 }
 
-#weight_input_container:focus-within #weight_input_unit {
-	color : #009A6E;
-}
-
 #weight_input:focus {
 	outline : none;
-	color   : #009A6E;
 }
 
 #next_button {

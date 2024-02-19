@@ -103,16 +103,28 @@ select[id="year_input"] {
 	width       : 32dvw;
 }
 
+select[id="year_input"]:focus-within {
+	border-color : #009A6E;
+}
+
 select[id="month_input"] {
 	margin-left  : auto;
 	margin-right : auto;
 	width        : 27dvw;
 }
 
+select[id="month_input"]:focus-within {
+	border-color : #009A6E;
+}
+
 select[id="day_input"] {
 	margin-right : 5dvw;
 	width        : 27dvw;
 	float        : right;
+}
+
+select[id="day_input"]:focus-within {
+	border-color : #009A6E;
 }
 
 #next_button {
