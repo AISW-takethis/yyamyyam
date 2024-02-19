@@ -259,3 +259,5 @@ def complete(request):
 	user_profile.save()
 	
 	return redirect("diet:recommend_diet")
+
+# logout:/accounts/logout
