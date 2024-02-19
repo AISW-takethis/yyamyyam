@@ -13,7 +13,6 @@ class UserProfile(models.Model):
     birth = models.DateField(null=True)
     height = models.IntegerField(null=True)
     weight = models.IntegerField(null=True)
-    goal_weight = models.IntegerField(null=True)
     level_of_activity = models.IntegerField(
         default=1,
         db_comment="1은 앉아서 일하는 경우, 2는 가벼운 활동을 하는 경우, 3은 보통 활동을 하는 경우, 4는 매우 활동적인 경우",
