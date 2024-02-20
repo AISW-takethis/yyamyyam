@@ -9,6 +9,7 @@ from .views import (
     record_detail,
     record_detail_search,
     loading,
+    my_page,
     image_process,
     search_items,
 )
@@ -27,4 +28,5 @@ urlpatterns = [
     path("detail_search/", record_detail_search, name="record_detail_search"),
     path("search_items/<str:term>", search_items, name="search_items"),
     path("loading", loading, name="loading"),
+    path("myPage", my_page, name="my_page"),
 ]

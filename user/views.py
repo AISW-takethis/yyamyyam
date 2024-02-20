@@ -10,7 +10,6 @@ from user.models import UserProfile
 
 import json
 
-user = User()
 user_profile = UserProfile()
 social_account = SocialAccount()
 
