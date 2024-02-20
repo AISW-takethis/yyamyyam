@@ -8,6 +8,7 @@ from .views import (
     record_detail,
     record_detail_search,
     loading,
+    my_page,
 )
 
 app_name = "diet"
@@ -19,4 +20,5 @@ urlpatterns = [
     path("detail", record_detail, name="record_detail"),
     path("detail_search", record_detail_search, name="record_detail_search"),
     path("loading", loading, name="loading"),
+    path("myPage", my_page, name="my_page"),
 ]

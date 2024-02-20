@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}마이 페이지{% endblock %}
+{% block css %}
+	<link rel = "stylesheet" href = "{% static 'diet/css/my_page.css' %}">
+{% endblock css %}
+{% block header %}마이 페이지{% endblock %}
+{% block main %}
+	<div id = "mypage-banner">
+		<div id = "banner-item-container">
+			<span id = "nickname">{{ nickname }}님</span>
+			<br id = "banner-br">
+			<span id = "hello">안녕하세요!</span>
+			<div>
+				<img src = "{% static 'asset/kakao.svg' %}" id = "kakao" alt = "">
+				<span id = "email">{{ email }}</span>
+			</div>
+		</div>
+	</div>
+	<div id = "button-container">
+		<div class = "div-button">
+			<label for = "notice"></label>
+			<input type = "button" id = "notice" class = "buttons" value = "알림설정"/>
+			<div class = "image-container" onclick = "popup_tos()">
+				<img src = "{% static 'user/images/agreement_detail_button.svg' %}" class = "item-image" alt = "">
+			</div>
+		</div>
+		<div class = "div-button">
+			<label for = "tos"></label>
+			<input type = "button" id = "tos" class = "buttons" value = "서비스 약관"/>
+			<div class = "image-container" onclick = "popup_tos()">
+				<img src = "{% static 'user/images/agreement_detail_button.svg' %}" class = "item-image" alt = "">
+			</div>
+		</div>
+		<div class = "div-button">
+			<label for = "FAQ"></label>
+			<input type = "button" id = "FAQ" class = "buttons" value = "FAQ"/>
+			<div class = "image-container" onclick = "popup_tos()">
+				<img src = "{% static 'user/images/agreement_detail_button.svg' %}" class = "item-image" alt = "">
+			</div>
+		</div>
+	</div>
+	<a id = "logout" href = "/accounts/logout">로그아웃</a>
+
+{% endblock main %}
+{% block script %}
+	<script src = "{% static 'diet/js/my_page.js' %}"></script>
+{% endblock script %}

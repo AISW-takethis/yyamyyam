@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from django.contrib.auth.models import User
+from user.models import UserProfile
 from .models import Food
 
 # for test
@@ -7,7 +9,6 @@ CALORIE_LIMIT = 2000
 MORNING = 1000
 LUNCH = 500
 DINNER = 0
-
 
 # Create your views here.
 def recommend(request):
@@ -50,3 +51,12 @@ def record_detail_search(request):
 
 def loading(request):
     return render(request, "loading.html", {})
+
+
+def my_page(request):
+    context = {
+        "nickname": UserProfile.objects.get(user_id = request.user).nickname,
+        "email": User.objects.filter(id = request.user.id).first().email,
+    }
+    
+    return render(request, "diet/my_page.html", context)
