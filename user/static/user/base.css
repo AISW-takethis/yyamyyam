@@ -1,8 +1,9 @@
 html {
-	width   : 100dvw;
-	height  : 100dvh;
-	padding : 0;
-	margin  : 0;
+	width       : 100dvw;
+	height      : 100dvh;
+	padding     : 0;
+	margin      : 0;
+	font-family : Pretendard-Regular, sans-serif;
 }
 
 body {

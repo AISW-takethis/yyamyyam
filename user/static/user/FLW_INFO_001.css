@@ -21,25 +21,25 @@ p {
 	margin-bottom : 10px;
 }
 
-#login_background_image {
+#image_yyamyyam {
 	position   : absolute;
-	bottom     : 0;
+	width      : 69.2dvw;
+	height     : 69.2dvw;
+	top        : 41.2dvh;
+	left       : 50%;
+	transform  : translateX(-50%);
 	object-fit : contain;
-	padding    : 0;
-	margin     : 0;
-	display    : block;
-	z-index    : -100;
 }
 
 .container {
+	position    : absolute;
 	overflow    : hidden;
 	margin-left : 5dvw;
-	margin-top  : 10.7dvh;
+	top         : 16.6dvh;
 }
 
 #welcome-main {
 	font-size   : 20px;
-	/*text-size-adjust : auto;*/
 	font-weight : 600;
 	text-align  : left;
 	color       : #4d525c;
@@ -47,10 +47,11 @@ p {
 }
 
 #welcome-sub {
-	font-size  : 14px;
-	/*text-size-adjust : 70%;*/
-	text-align : left;
-	color      : #4d525c;
+	font-family : Pre;
+	font-size   : 14px;
+	line-height : 22px;
+	text-align  : left;
+	color       : #4d525c;
 }
 
 #next-button {
