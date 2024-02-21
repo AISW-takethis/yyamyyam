@@ -35,6 +35,7 @@
 			</button>
 		</div>
 
+		{#모든 요소가 입력되어야 다음 버튼 활성화#}
 		<script type = "application/javascript">
 			const heightInput = document.getElementById("height_input");
 			const heightUnit = document.getElementById("height_input_unit");
@@ -57,6 +58,7 @@
 				// 모든 요소가 선택되었을 때 버튼을 활성화
 				submitBtn.disabled = !(heightEntered && weightEntered);
 
+				// 값이 입력되면 텍스트 색 변경
 				if (heightEntered) {
 					heightUnit.style.color = "#181818"
 				} else {

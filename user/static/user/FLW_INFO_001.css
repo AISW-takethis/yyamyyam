@@ -43,11 +43,9 @@ p {
 	font-weight : 600;
 	text-align  : left;
 	color       : #4d525c;
-
 }
 
 #welcome-sub {
-	font-family : Pre;
 	font-size   : 14px;
 	line-height : 22px;
 	text-align  : left;

@@ -146,6 +146,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# SITE_ID: 관리자 페이지에서 사이트 정보를 볼 때 인덱스 번호. 127.0.0.1의 인덱스 번호
 SITE_ID = 2
 LOGIN_REDIRECT_URL = "/signup/agreement/"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"
