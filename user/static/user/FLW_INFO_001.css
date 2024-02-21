@@ -21,14 +21,14 @@ p {
 	margin-bottom : 10px;
 }
 
-#login_background_image {
+#image_yyamyyam {
 	position   : absolute;
-	bottom     : 0;
+	width      : 69.2dvw;
+	height     : 69.2dvw;
+	top        : 41.2dvh;
+	left       : 50%;
+	transform  : translateX(-50%);
 	object-fit : contain;
-	padding    : 0;
-	margin     : 0;
-	display    : block;
-	z-index    : -100;
 }
 
 .container {
