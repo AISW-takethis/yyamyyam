@@ -15,7 +15,6 @@
 	<form class = "form" action = "{% url 'user:nickname' %}" method = "post" name = "agreement_form">
 		{% csrf_token %}
 		<div class = "container">
-
 			<p id = "welcome-main">환영합니다!</p>
 			<p id = "welcome-sub">
 				<span>냠냠은 고객의 건강한 식습관을 위해</span>
@@ -24,10 +23,11 @@
 				<br/>
 				<span>기타 정보를 수집하여 하루 권장 칼로리를 제공합니다.</span>
 			</p>
-
-			<button id = "next-button" type = "submit">
-				<span id = "next-button-text">다음</span>
-			</button>
 		</div>
+
+		<button id = "next-button" type = "submit">
+			<span id = "next-button-text">다음</span>
+		</button>
+		<img src = "{% static 'user/images/image_yyamyyam.svg' %}" id = "image_yyamyyam" alt = "">
 	</form>
 {% endblock %}
