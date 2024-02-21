@@ -25,10 +25,10 @@
 	<form action = "{% provider_login_url 'kakao' %}" method = "post">
 		{% csrf_token %}
 		<button>
-			<img src = "{% static 'user/images/kakao_icon.svg' %}" id = "kakao_icon_image">
-			<span id = "kakao_button_text">카카오 로그인</span>
+				<img src = "{% static 'user/images/kakao_icon.svg' %}" id = "kakao_icon_image" alt = "">
+				<span id = "kakao_button_text">카카오 로그인</span>
 		</button>
 	</form>
 
-	<img src = "{% static 'user/images/image_yyamyyam.svg' %}" id = "image_yyamyyam" alt="">
+	<img src = "{% static 'user/images/image_yyamyyam.svg' %}" id = "image_yyamyyam" alt = "">
 {% endblock %}
