@@ -54,6 +54,8 @@
 			</button>
 		</div>
 
+		
+		{#성별과 생일에 따라 항목을 선택#}
 		{% if gender == 1 %}
 			<script type = "application/javascript">
 				document.querySelector('#radio_male').checked = true;
@@ -74,6 +76,7 @@
 			</script>
 		{% endif %}
 
+		{#모든 요소가 입력되어야 다음 버튼 활성화#}
 		<script type = "application/javascript">
 			const maleInput = document.getElementById("radio_male");
 			const femaleInput = document.getElementById("radio_female");
@@ -83,24 +86,11 @@
 			const submitBtn = document.getElementById("next_button");
 
 			window.addEventListener("load", checkActivation);
-			
-			yearInput.addEventListener("input", updateDate);
-			monthInput.addEventListener("input", updateDate);
-			dayInput.addEventListener("input", updateDate);
 
 			// 모든 라디오 버튼과 select 요소들의 변경을 감지하기 위해 change 이벤트를 추가
 			[maleInput, femaleInput, yearInput, monthInput, dayInput].forEach(element => {
 				element.addEventListener("change", checkActivation);
 			});
-
-			function updateDate() {
-				const year = yearInput.value;
-				const month = monthInput.value.padStart(2, "0");
-				const day = dayInput.value.padStart(2, "0");
-
-				const dateValue = year + month + day;
-				console.log("Selected date: " + dateValue);
-			}
 
 			function checkActivation() {
 				// 모든 라디오 버튼과 select 요소들의 값이 존재하는지 확인

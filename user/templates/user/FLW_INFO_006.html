@@ -37,6 +37,7 @@
 			</button>
 		</div>
 
+		{#차트(게이지) 설정#}
 		<script>
 			var chart = bb.generate({
 				bindto: "#kcal_chart",
@@ -50,15 +51,12 @@
 					}
 				},
 				gauge: {
-					{#arcLength: 70,#}
-					{#fullCircle: true,#}
 					fullCircle: false,
 					label: {
 						extents: function () {
 							return "";
 						}
 					},
-					{#startingAngle: -2.2,#}
 					width: 10
 				},
 				legend: {

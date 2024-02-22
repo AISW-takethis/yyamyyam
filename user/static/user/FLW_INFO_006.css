@@ -22,7 +22,6 @@
 }
 
 .container {
-	/*overflow : hidden;*/
 	height : 93dvh;
 }
 
@@ -78,14 +77,10 @@
 #kcal_chart {
 	position  : absolute;
 	top       : 30dvh;
-	/*top       : 5dvh;*/
-	/*margin-top : 52.5dvh;*/
-	/*top       : 50%;*/
 	left      : 50%;
 	width     : 77dvw;
 	height    : 17.2dvh;
 	transform : translatex(-50%);
-	/*transform : translate(-50%, -50%);*/
 }
 
 #next_button {
