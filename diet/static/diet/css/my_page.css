@@ -8,19 +8,19 @@ span {
 }
 
 #mypage-banner {
-	width            : 100%;
+    color: white;
 	height           : 17.5dvh;
 	background-color : var(--bs-primary);
 }
 
 #banner-item-container {
-	position : absolute;
 	width    : 90dvw;
 	height   : 11.4dvh;
 	left     : 5dvw;
 	top      : 9.8dvh;
 }
 
+/*
 #nickname {
 	color       : white;
 	font-size   : 20px;
@@ -37,7 +37,6 @@ span {
 }
 
 #kakao {
-	position    : absolute;
 	bottom      : 0;
 	width       : 24px;
 	height      : 24px;
@@ -46,7 +45,6 @@ span {
 }
 
 #email {
-	position   : absolute;
 	bottom     : 0;
 	left       : 28px;
 	color      : white;
@@ -55,14 +53,12 @@ span {
 }
 
 #button-container {
-	position : absolute;
 	width    : 90dvw;
 	left     : 5dvw;
 	top      : 27.8dvh;
 }
 
 .div-button {
-	position         : relative;
 	width            : 90dvw;
 	height           : 5.2dvh;
 	border           : none;
@@ -71,7 +67,6 @@ span {
 }
 
 .buttons {
-	position         : absolute;
 	top              : 50%;
 	transform        : translateY(-50%);
 	border           : none;
@@ -82,7 +77,6 @@ span {
 }
 
 .image-container {
-	position  : absolute;
 	width     : 24px;
 	height    : 24px;
 	right     : 0;
@@ -91,7 +85,6 @@ span {
 }
 
 .item-image {
-	position  : absolute;
 	width     : 12px;
 	height    : 12px;
 	top       : 50%;
@@ -100,7 +93,6 @@ span {
 }
 
 #logout {
-	position         : absolute;
 	top              : 47dvh;
 	left             : 50%;
 	transform        : translateX(-50%);

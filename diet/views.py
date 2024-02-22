@@ -433,4 +433,4 @@ def my_page(request):
         "email": User.objects.filter(id=request.user.id).first().email,
     }
 
-    return render(request, "diet/my_page.html", context)
+    return render(request, "diet/mypage.html", context)

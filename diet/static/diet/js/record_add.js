@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(formatDate(lastModifiedDate), formatTime(lastModifiedDate), formatLastModifiedDate(lastModifiedDate));
             changeTakeAt(formatDate(lastModifiedDate), formatTime(lastModifiedDate), formatLastModifiedDate(lastModifiedDate));
             // loding modal의 'd-none' class를 제거하여 화면에 보이게 합니다.
-//            loading.classList.remove('d-none');
+            loading.classList.remove('d-none');
         } else {
             console.log('파일이 선택되지 않았거나 촬영 시간을 확인할 수 없습니다.');
         }

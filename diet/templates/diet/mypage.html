@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}마이페이지{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'diet/css/my_page.css' %}">
+{% endblock css %}
+{% block header %}마이 페이지{% endblock %}
+{% block main %}
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 px-0">
+                <div id="mypage-banner"class="d-flex justify-content-center flex-column px-2">
+                    <h1 id="nickname">{{ nickname }}님,</h1>
+                    <h1 id="hello">안녕하세요!</h1>
+                    <div class="my-2">
+                        <img src="{% static 'asset/kakao.svg' %}" id="kakao" alt="">
+                        <span id="email">{{ email }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row link-container">
+            <div class="col-12 my-1">
+                <a href="#" class="link py-2 d-flex justify-content-between border-bottom">
+                    <span class="fs-3">알림설정</span>
+                    <span class="fs-3">></span>
+                </a>
+            </div>
+            <div class="col-12 my-1">
+                <a href="#" class="link py-2 d-flex justify-content-between border-bottom">
+                    <span class="fs-3">서비스 약관</span>
+                    <span class="fs-3">></span>
+                </a>
+            </div>
+            <div class="col-12 my-1">
+                <a href="#" class="link py-2 d-flex justify-content-between border-bottom">
+                    <span class="fs-3">FAQ</span>
+                    <span class="fs-3">></span>
+                </a>
+            </div>
+            <div class="col-12 my-5">
+                <a href="/accounts/logout" class="link py-2 d-flex justify-content-center">
+                    로그아웃
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock main %}
+{% block script %}
+{% endblock script %}
