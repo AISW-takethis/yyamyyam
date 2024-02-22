@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    btnConfirm.addEventListener('click', function() {
+    btnConfirm.addEventListener('click', async function() {
         const checkedRadio = document.querySelector('input[name="listGroupRadio"]:checked');
 
         // 현재 페이지 URL의 쿼리 스트링 파싱
@@ -91,18 +91,29 @@ document.addEventListener("DOMContentLoaded", function() {
             // localStorage의 foodInfo에서 key에 해당하는 item을 찾아서 지운다.
             foodInfo = JSON.parse(localStorage.getItem('foodInfo'));
             delete foodInfo[key];
-
         }
+
+        imageUrl = '/static/asset/food_images/' + foodName + '.jpg';
+
         // 새로운 item을 추가한다.
+        try {
+            foodImage = await convertImgToBase64URL(imageUrl);
+        } catch (error) {
+            console.error(error);
+        }
+
         foodInfo[foodId] = {
             name: foodName,
             calorie: calorie,
             carbohydrate: carbohydrate,
             protein: protein,
             fat: fat,
-            quantity: quantity
+            quantity: quantity,
+            img: foodImage
         };
+
         localStorage.setItem('foodInfo', JSON.stringify(foodInfo));
+
 
         // record_detail로 이동
         window.location.href = '/diet/detail/';

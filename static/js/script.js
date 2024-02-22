@@ -28,6 +28,27 @@ function updateGoBackButton() {
 }
 
 
+function convertImgToBase64URL(src, outputFormat) {
+    return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.crossOrigin = 'Anonymous';
+        img.onload = function() {
+            var canvas = document.createElement('CANVAS');
+            var ctx = canvas.getContext('2d');
+            canvas.height = this.naturalHeight;
+            canvas.width = this.naturalWidth;
+            ctx.drawImage(this, 0, 0);
+            var dataURL = canvas.toDataURL(outputFormat);
+            resolve(dataURL);
+            canvas = null;
+        };
+        img.onerror = function() {
+            reject(new Error('Could not convert image to Base64'));
+        };
+        img.src = src;
+    });
+}
+
 
 window.addEventListener('resize', adjustHeight);
 adjustHeight();
@@ -39,3 +60,10 @@ document.getElementById('go-back').addEventListener('click', function() {
 });
 
 updateGoBackButton();
+
+
+document.getElementById('nav-add').addEventListener('click', function() {
+    // localstorage를 비운다.
+    localStorage.clear();
+});
+

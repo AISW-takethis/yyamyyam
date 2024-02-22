@@ -14,118 +14,172 @@ function getCookie(name) {
     return cookieValue;
 }
 
-function convertImgToBase64URL(src, callback, outputFormat) {
-    var img = new Image();
-    img.crossOrigin = 'Anonymous'; // CORS 이슈를 방지하기 위해 필요할 수 있습니다.
-    img.onload = function() {
-        var canvas = document.createElement('CANVAS');
-        var ctx = canvas.getContext('2d');
-        var dataURL;
-        canvas.height = this.naturalHeight;
-        canvas.width = this.naturalWidth;
-        ctx.drawImage(this, 0, 0);
-        dataURL = canvas.toDataURL(outputFormat);
-        callback(dataURL);
-        canvas = null;
+function formatLastModifiedDate(date) {
+    const options = {
+        year: 'numeric', month: 'long', day: 'numeric',
+        hour: 'numeric', minute: 'numeric',
+        hour12: true, // 12시간제로 표시
     };
-    img.src = src;
-    if (img.complete || img.complete === undefined) {
-        img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-        img.src = src;
-    }
+    const formatter = new Intl.DateTimeFormat('ko-KR', options);
+    return formatter.format(date);
 }
 
+// 날짜를 "YYYY.MM.DD" 형태로 포맷팅하는 함수
+function formatDate(date) {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    const formatter = new Intl.DateTimeFormat('ko-KR', options);
+    return formatter.format(date).replaceAll('. ', '.').slice(0, -1); // ". "을 "."으로 변경하고, 마지막 문자 제거
+}
+
+// 시간을 "오전/오후 HH:MM" 형태로 포맷팅하는 함수
+function formatTime(date) {
+    const options = { hour: 'numeric', minute: '2-digit', hour12: true };
+    const formatter = new Intl.DateTimeFormat('ko-KR', options);
+    return formatter.format(date);
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     var fileInput = document.querySelector('input[type="file"]');
     var form = document.getElementById('record_form');
     var imagePreview = document.getElementById('imagePreview');
     var upload_text = document.getElementById('upload-text');
+    var imageBase64 = document.getElementById('image-base64');
 
     var btnAddDetail = document.getElementById('btn-add-detail');
     var btnEditDetail = document.getElementById('btn-edit-detail');
 
-    if (imagePreview.src === 'http://127.0.0.1:8000/diet/add/' && localStorage.getItem('imagePreview')){
-        upload_text.hidden = true;
-        imagePreview.hidden = false;
+    // modal 관련 요소
+    var modalElement = document.getElementById('staticBackdrop');
+    var shootingTimeButton = modalElement.querySelector('#shooting-time-button');
+    var currentTimeButton = modalElement.querySelector('#current-time-button');
+    var lastModifiedDate = null;
+    var takeAt = document.getElementById('text-now');
+    var takeDate = document.getElementById('text-date');
+    var takeTime = document.getElementById('text-time');
 
-        // base64 to image
-        var base64Img = localStorage.getItem('imagePreview');
-        imagePreview.src = base64Img;
+    // loading 관련 요소
+    var loading = document.getElementById('loading-modal');
+
+    function changeTakeAt(textDate, textTime, textAt){
+        takeDate.value = textDate;
+        takeTime.value = textTime;
+        takeAt.value = textAt;
     }
 
-    if (imagePreview.src !== 'http://127.0.0.1:8000/diet/add/'){
-        const imageUrl = imagePreview.src;
-        // image to base64
-        convertImgToBase64URL(imageUrl, function(base64Img){
-            localStorage.setItem('imagePreview', base64Img);
-        });
-    }
+    // "촬영 시간" 버튼 클릭 이벤트
+    shootingTimeButton.addEventListener('click', function () {
+        if (lastModifiedDate) {
+            changeTakeAt(formatDate(lastModifiedDate), formatTime(lastModifiedDate), formatLastModifiedDate(lastModifiedDate));
+            // loding modal의 'd-none' class를 제거하여 화면에 보이게 합니다.
+            loading.classList.remove('d-none');
+        } else {
+            console.log('파일이 선택되지 않았거나 촬영 시간을 확인할 수 없습니다.');
+        }
+    });
 
-    if (localStorage.getItem('selectedOption')) {
-        const selectedOption = localStorage.getItem('selectedOption');
-        document.getElementById(selectedOption).checked = true;
-    }
-
-    if (localStorage.getItem('mealMemo')) {
-        document.getElementById('meal-memo').value = localStorage.getItem('mealMemo');
-    }
-
-    if (localStorage.getItem('text-date')) {
-        document.getElementById('text-date').value = localStorage.getItem('text-date');
-    }
-
-    if (localStorage.getItem('text-time')) {
-        document.getElementById('text-time').value = localStorage.getItem('text-time');
-    }
+    // "현재 시간" 버튼 클릭 이벤트
+    currentTimeButton.addEventListener('click', function () {
+        const currentTime = new Date();
+        changeTakeAt(formatDate(currentTime), formatTime(currentTime), formatLastModifiedDate(currentTime));
+        // loding modal의 'd-none' class를 제거하여 화면에 보이게 합니다.
+        loading.classList.remove('d-none');
+    });
 
 
+    // 이미지 업로드 -> 미리보기
     fileInput.addEventListener('change', function (e) {
         var file = e.target.files[0];
         var reader = new FileReader();
         var upload_text = document.getElementById('upload-text');
+        var imageBase64 = document.getElementById('image-base64');
+        var modalBody = document.getElementById('modal-body');
+
+        var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+
+
         reader.onload = function (e) {
             imagePreview.src = e.target.result;
             imagePreview.hidden = false;
+            imageBase64.value = imagePreview.src;
+            localStorage.setItem('imagePreview', imagePreview.src);
+
+            lastModifiedDate = new Date(file.lastModified);
+
+            modalBody.innerHTML = `
+                ${lastModifiedDate.toLocaleString()}에 촬영된 사진입니다. 촬영 시간 또는 현재 시간을 선택해주세요.
+            `;
+            modal.show();
+
 
             // 이미지 업로드 시에는 이미지 파일의 Base64 데이터를 FormData 객체에 추가하여 전송합니다.
             // 이 때, 이미지 파일의 이름은 'image'로 지정합니다.
             var formData = new FormData();
             formData.append('image', file);
 
+
             // 서버에 이미지를 업로드하는 AJAX 요청을 구현합니다.
-            // 이 부분은 서버의 엔드포인트 URL과 요청 방식에 따라 달라집니다.
-            fetch('/diet/image_process', {
-                method: 'POST',
-                body: JSON.stringify({image: e.target.result}),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': getCookie('csrftoken')
-                }
-            }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-            }).catch(error => {
-                console.error('Error:', error);
-            });
+            // TODO. AI 서버로 보내는 부분!
+//            fetch('/diet/image_process', {
+//                method: 'POST',
+//                body: JSON.stringify({image: e.target.result}),
+//                headers: {
+//                    'Content-Type': 'application/json',
+//                    'X-CSRFToken': getCookie('csrftoken')
+//                }
+//            }).then(response => response.json())
+//            .then(data => {
+//                console.log(data);
+//            }).catch(error => {
+//                console.error('Error:', error);
+//            });
         };
         reader.readAsDataURL(file);
-        upload_text.hidden = true;
+
+        if (upload_text){
+            upload_text.hidden = true;
+        }
     });
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        // 여기서 FormData를 사용하여 서버에 이미지를 업로드하는 AJAX 요청을 구현합니다.
-        // 이 부분은 서버의 엔드포인트 URL과 요청 방식에 따라 달라집니다.
-        alert('서버에 이미지 업로드 구현 필요');
-    });
+    // localStroage에 저장된 음식 데이터를 가져옵니다.================================================
+    // 이미지 관련
+    if (localStorage.getItem('imagePreview')){
+        if (upload_text){
+            upload_text.hidden = true;
+        }
+        imagePreview.hidden = false;
 
-    // localStroage에 저장된 음식 데이터를 가져옵니다.
+        // base64 to image
+        var base64Img = localStorage.getItem('imagePreview');
+        imagePreview.src = base64Img;
+        imageBase64.value = imagePreview.src;
+    }
+
+
+
+    // 메모 관련
+    if (localStorage.getItem('mealMemo')) {
+        document.getElementById('meal-memo').value = localStorage.getItem('mealMemo');
+    }
+    // 날짜 및 시간 관련
+    if (localStorage.getItem('text-date')) {
+        document.getElementById('text-date').value = localStorage.getItem('text-date');
+    }
+    if (localStorage.getItem('text-time')) {
+        document.getElementById('text-time').value = localStorage.getItem('text-time');
+    }
+    if (localStorage.getItem('takeAt')){
+        document.getElementById('text-now').value = localStorage.getItem('takeAt');
+    }
+    // 음식 종류 관련
+    if (localStorage.getItem('selectedOption')) {
+        const selectedOption = localStorage.getItem('selectedOption');
+        document.getElementById(selectedOption).checked = true;
+    }
+
+    // 상세 음식 데이터 관련
     var foodInfo = JSON.parse(localStorage.getItem('foodInfo'));
 
-    // 음식 데이터가 있는 경우, HTML에 동적으로 추가합니다.
     if (foodInfo) {
-
         // 음식 상세 정보 관련 ===================================================
         var foodDetailList = document.getElementById('food-detail-list');
         // foodInfo 객체의 각 키(음식 ID)에 대해 반복합니다.
@@ -136,10 +190,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // 음식 상세 정보를 표시하는 HTML 요소를 생성합니다.
             var foodElement = document.createElement('div');
             foodElement.classList.add('col-3');;
-
             foodElement.innerHTML = `
                         <div class="row">
-                            <img src="/static/asset/food_images/${food.name}.jpg" class="" alt="${food.name}">
+                            <img src="${food.img}" alt="${food.name}">
+                            <input type="hidden" name="fd-${foodId}-img" value="${food.img}">
+                            <input type="hidden" name="fd-${foodId}-name" value="${food.name}">
+                            <input type="hidden" name="fd-${foodId}-calorie" value="${food.calorie}">
+                            <input type="hidden" name="fd-${foodId}-carbohydrate" value="${food.carbohydrate}">
+                            <input type="hidden" name="fd-${foodId}-protein" value="${food.protein}">
+                            <input type="hidden" name="fd-${foodId}-fat" value="${food.fat}">
+                            <input type="hidden" name="fd-${foodId}-quantity" value="${food.quantity}">
                         </div>
                         <div class="row justify-content-center">
                             ${food.name}

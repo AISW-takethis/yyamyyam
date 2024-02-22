@@ -85,7 +85,6 @@ body, html {
     font-family: "Pretendard";
     font-size: 12px;
     color: var(--grayscale-01);
-
 }
 
 .mobile {
@@ -121,6 +120,11 @@ main {
 /* for Chrome, Safari, Opera */
 main::-webkit-scrollbar {
   display: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--grayscale-02);
 }
 
 nav {

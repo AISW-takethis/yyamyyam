@@ -7,12 +7,12 @@
     <i class="fas fa-book {% if '/diet/list' in current_path %}selected{% endif %}"></i>
     식단기록
 </a>
-<a href="/diet/add/" class="{% if current_path == '/diet/add' %}selected{% endif %}">
+<a id="nav-add" href="/diet/add/" class="{% if current_path == '/diet/add' %}selected{% endif %}">
     <i class="fas fa-th-large {% if current_path == '/diet/add' %}selected{% endif %}"></i>
     식단촬영
 </a>
-<a href="#" class="{% if '/mypage' in current_path %}selected{% endif %}">
-    <i class="fas fa-user {% if '/mypage' in current_path %}selected{% endif %}"></i>
+<a href="/diet/mypage/" class="{% if '/diet/mypage/' in current_path %}selected{% endif %}">
+    <i class="fas fa-user {% if '/diet/mypage/' in current_path %}selected{% endif %}"></i>
     마이페이지
 </a>
 {% endwith %}

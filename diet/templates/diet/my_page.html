@@ -6,6 +6,7 @@
 {% endblock css %}
 {% block header %}마이 페이지{% endblock %}
 {% block main %}
+    <div class="container">
 	<div id = "mypage-banner">
 		<div id = "banner-item-container">
 			<span id = "nickname">{{ nickname }}님</span>
@@ -41,6 +42,8 @@
 		</div>
 	</div>
 	<a id = "logout" href = "/accounts/logout">로그아웃</a>
+
+	</div>
 
 {% endblock main %}
 {% block script %}
