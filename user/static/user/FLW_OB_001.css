@@ -47,5 +47,17 @@ button {
 	top              : 89dvh;
 	left             : 50%;
 	margin-left      : -45dvw;
-	text-align       : center;
+	display          : flex;
+	align-items      : center;
+	justify-content  : center;
+}
+
+#kakao_icon_image {
+	width  : 18px;
+	height : 18px;
+}
+
+#kakao_button_text {
+	margin-left : 5px;
+	font-size   : 14px;
 }
