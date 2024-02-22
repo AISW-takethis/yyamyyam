@@ -99,7 +99,13 @@ document.addEventListener("DOMContentLoaded", function() {
         try {
             foodImage = await convertImgToBase64URL(imageUrl);
         } catch (error) {
-            console.error(error);
+            try {
+                imageUrl = '/static/asset/image_plus.png';
+                foodImage = await convertImgToBase64URL(imageUrl);
+            }
+            catch (error) {
+                console.error(error);
+            }
         }
 
         foodInfo[foodId] = {

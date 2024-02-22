@@ -61,7 +61,7 @@
         <div class="row mb-4">
             <div class="col">
                 <div class="d-flex align-items-center mt-2 summary-box py-3">
-                      <span class="nutrition-status badge bg-primary me-5"> 적정</span>
+                      <span id="bg-good" class="nutrition-status badge bg-primary me-5" hidden> 적정</span>
                       <span id="total-nutrition" class="grayscale-02">{% if food %}탄수화물 {{ food.carbohydrate }}g 단백질 {{ food.protein }}g 지방 {{ food.fat }}g
                                                     {% endif %}</span>
                   </div>

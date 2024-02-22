@@ -107,10 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
             foodElement.appendChild(selectElement);
             // foodElement에 change 요소 추가
             foodElement.appendChild(changeElement);
-
             // 컨테이너에 음식 정보 요소 추가
             foodContainer.appendChild(foodElement);
-
         });
     }
 });

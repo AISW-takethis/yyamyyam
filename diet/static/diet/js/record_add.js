@@ -38,6 +38,31 @@ function formatTime(date) {
     return formatter.format(date);
 }
 
+function saveOptionMemo() {
+    // 'options'라는 이름을 가진 라디오 버튼들 중에서 선택된 것을 찾습니다.
+    const selectedOption = document.querySelector('input[name="options"]:checked');
+    const memo = document.getElementById('meal-memo').value;
+    const text_date = document.getElementById('text-date').value;
+    const text_time = document.getElementById('text-time').value;
+
+    if (memo) {
+           localStorage.setItem('mealMemo', memo);
+    }
+
+    // 선택된 라디오 버튼이 있을 경우, 그 value를 localStorage에 저장합니다.
+    if (selectedOption) {
+        localStorage.setItem('selectedOption', selectedOption.value);
+    }
+
+    if (text_date){
+           localStorage.setItem('text-date', text_date);
+    }
+
+    if (text_time){
+           localStorage.setItem('text-time', text_time);
+   }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     var fileInput = document.querySelector('input[type="file"]');
     var form = document.getElementById('record_form');
@@ -64,14 +89,18 @@ document.addEventListener('DOMContentLoaded', function () {
         takeDate.value = textDate;
         takeTime.value = textTime;
         takeAt.value = textAt;
+
+        localStorage.setItem('text-date', textDate);
+        localStorage.setItem('text-time', textTime);
     }
 
     // "촬영 시간" 버튼 클릭 이벤트
     shootingTimeButton.addEventListener('click', function () {
         if (lastModifiedDate) {
+            console.log(formatDate(lastModifiedDate), formatTime(lastModifiedDate), formatLastModifiedDate(lastModifiedDate));
             changeTakeAt(formatDate(lastModifiedDate), formatTime(lastModifiedDate), formatLastModifiedDate(lastModifiedDate));
             // loding modal의 'd-none' class를 제거하여 화면에 보이게 합니다.
-            loading.classList.remove('d-none');
+//            loading.classList.remove('d-none');
         } else {
             console.log('파일이 선택되지 않았거나 촬영 시간을 확인할 수 없습니다.');
         }
@@ -243,31 +272,12 @@ document.addEventListener('DOMContentLoaded', function () {
         saveOptionMemo();
     });
 
-    function saveOptionMemo() {
-        // 'options'라는 이름을 가진 라디오 버튼들 중에서 선택된 것을 찾습니다.
-        const selectedOption = document.querySelector('input[name="options"]:checked');
-        const memo = document.getElementById('meal-memo').value;
-        const text_date = document.getElementById('text-date').value;
-        const text_time = document.getElementById('text-time').value;
+    var bgGood = document.getElementById('bg-good');
+    var bgGoodText = document.getElementById('total-nutrition');
 
-        console.log(text_date, text_time);
-
-        if (memo) {
-               localStorage.setItem('mealMemo', memo);
-        }
-
-        // 선택된 라디오 버튼이 있을 경우, 그 value를 localStorage에 저장합니다.
-        if (selectedOption) {
-            localStorage.setItem('selectedOption', selectedOption.value);
-        }
-
-        if (text_date){
-               localStorage.setItem('text-date', text_date);
-        }
-
-        if (text_time){
-               localStorage.setItem('text-time', text_time);
-       }
+    if (bgGoodText.textContent !== '' && bgGoodText.textContent !== '탄수화물: 0g, 단백질: 0g, 지방: 0g'){
+        // bgGood을 보여준다.
+        bgGood.hidden = false;
     }
 
 });

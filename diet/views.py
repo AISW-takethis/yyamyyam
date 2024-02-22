@@ -288,25 +288,26 @@ def record_add(request):
         detail_of_diet = {}
         detail_of_diet_ids = []
 
-        orm_detail_of_diet = DetailOfDiet()
-
         for key in data:
             if "fd" not in key:
                 continue
 
             _, detail_id, tag = key.split("-")
 
+            # detail_id를 중복없이 리스트에 저장한다.
             if detail_id not in detail_of_diet_ids:
                 detail_of_diet_ids.append(detail_id)
 
+            # 디테일 아이디를 키로 하는 딕셔너리에 디테일 정보들을 넣는다.
             if detail_of_diet.get(detail_id) is None:
+                # detail_id를 키로 하는 딕셔너리가 없으면 생성
                 detail_of_diet[detail_id] = {}
                 detail_of_diet[detail_id][tag] = data[key]
             else:
                 detail_of_diet[detail_id][tag] = data[key]
 
         for detail_id in detail_of_diet_ids:
-
+            orm_detail_of_diet = DetailOfDiet()
             # 이미지 저장
             food_image_file_name = (
                 str(request.user.id) + detail_id + str(string_save_datetime) + ".jpeg"

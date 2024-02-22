@@ -143,7 +143,7 @@
                     {% for detail in detail_list %}
                         if ('{{ detail.0 }}' == id) {
                              var img_path = '/{{ detail.8 }}';
-                             var temp = {};
+                             var temp = localStorage.getItem('foodInfo') ? JSON.parse(localStorage.getItem('foodInfo')) : {};
 
                              try {
                                  var base64Img = await convertImgToBase64URL(img_path);
