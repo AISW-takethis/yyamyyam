@@ -2,6 +2,10 @@ main {
     display: flex;
 }
 
+nav {
+    display: none;
+}
+
 .pr-0 {
     padding-right: 0 !important;
 }

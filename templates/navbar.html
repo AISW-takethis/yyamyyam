@@ -1,16 +1,18 @@
-<a href="/diet/recommend" class="selected">
-    <i class="fas fa-home selected"></i>
+{% with request.path as current_path %}
+<a href="/diet/recommend/" class="{% if '/diet/recommend' in current_path  %}selected{% endif %}">
+    <i class="fas fa-home {% if '/diet/recommend' in current_path %}selected{% endif %}"></i>
     홈
 </a>
-<a href="/diet/list">
-    <i class="fas fa-book"></i>
+<a href="/diet/list/" class="{% if '/diet/list' in current_path %}selected{% endif %}">
+    <i class="fas fa-book {% if '/diet/list' in current_path %}selected{% endif %}"></i>
     식단기록
 </a>
-<a href="/diet/add">
-    <i class="fas fa-th-large"></i>
+<a id="nav-add" href="/diet/add/" class="{% if current_path == '/diet/add' %}selected{% endif %}">
+    <i class="fas fa-th-large {% if current_path == '/diet/add' %}selected{% endif %}"></i>
     식단촬영
 </a>
-<a href="/diet/myPage">
-    <i class="fas fa-user"></i>
+<a href="/diet/mypage/" class="{% if '/diet/mypage/' in current_path %}selected{% endif %}">
+    <i class="fas fa-user {% if '/diet/mypage/' in current_path %}selected{% endif %}"></i>
     마이페이지
 </a>
+{% endwith %}

@@ -10,120 +10,9 @@
     <form class="d-flex flex-fill flex-column">
         <div class="row">
             <div class="col">
-                <!-- 아이템1 -->
-                <div class="row justify-content-center mb-3 py-3 border-bottom border-5">
-                    <div class="row py-3 align-items-center">
-                        <div class="col-3 text-start">
-                            <img src="{% static 'asset/food_image.png' %}" class="detail-food-img"/>
-                        </div>
-                        <div class="col-9 d-flex flex-column justify-content-between py-2">
-                            <div class="row p-0">
-                                <h2>보리밥</h2>
-                            </div>
-                            <div class="row d-block mb-1 ">
-                                <span class="pr-0 fs-1">128</span>
-                                <span class="pl-0 grayscale-02">Kcal (1인분 000g)</span>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" aria-label="Example 1px high" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row align-items-center mb-3">
-                        <div class="col-9 form-floating">
-                            <select class="form-select text-center" id="floatingSelect" aria-label="Floating label select example">
-                                <option value="0" selected></option>
-                                <option value="0.5">0.25</option>
-                                <option value="0.5">0.5</option>
-                                <option value="1.0">1.0</option>
-                                <option value="1.5">1.5</option>
-                                <option value="2.0">2.0</option>
-                                <option value="3.0">3.0</option>
-                                <option value="4.0">4.0</option>
-                                <option value="5.0">5.0</option>
-
-                            </select>
-                            <label class="ms-2" for="floatingSelect">인분</label>
-                        </div>
-                        <div class="col-3">
-                            <div class="d-grid gap-2">
-                                <input type="submit" class="btn btn-outline-primary" value="삭제"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col">
-                            ㅇㅇㅇ가 아닌가요?
-                        </div>
-                        <div class="col text-end">
-                            <button class="btn btn-secondary" >수정하기</button>
-                        </div>
-                    </div>
-                </div> <!-- 아이템1 끝 -->
-                <!-- 아이템1 -->
-                <div class="row justify-content-center mb-3 py-3 border-bottom border-5">
-                    <div class="row py-3 align-items-center">
-                        <div class="col-3 text-start">
-                            <img src="{% static 'asset/food_image.png' %}" class="detail-food-img"/>
-                        </div>
-                        <div class="col-9 d-flex flex-column justify-content-between py-2">
-                            <div class="row p-0">
-                                <h2>보리밥</h2>
-                            </div>
-                            <div class="row d-block mb-1 ">
-                                <span class="pr-0 fs-1">128</span>
-                                <span class="pl-0 grayscale-02">Kcal (1인분 000g)</span>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="progress" style="height: 8px;">
-                                        <div class="progress-bar" role="progressbar" aria-label="Example 1px high" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row align-items-center mb-3">
-                        <div class="col-9 form-floating">
-                            <select class="form-select text-center" id="floatingSelect" aria-label="Floating label select example">
-                                <option value="0" selected></option>
-                                <option value="0.5">0.25</option>
-                                <option value="0.5">0.5</option>
-                                <option value="1.0">1.0</option>
-                                <option value="1.5">1.5</option>
-                                <option value="2.0">2.0</option>
-                                <option value="3.0">3.0</option>
-                                <option value="4.0">4.0</option>
-                                <option value="5.0">5.0</option>
-
-                            </select>
-                            <label class="ms-2" for="floatingSelect">인분</label>
-                        </div>
-                        <div class="col-3">
-                            <div class="d-grid gap-2">
-                                <input type="submit" class="btn btn-outline-primary" value="삭제"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row d-flex justify-content-between align-items-center">
-                        <div class="col">
-                            ㅇㅇㅇ가 아닌가요?
-                        </div>
-                        <div class="col text-end">
-                            <button class="btn btn-secondary" >수정하기</button>
-                        </div>
-                    </div>
-                </div> <!-- 아이템1 끝 -->
-
-
+                <!-- item1 -->
+                <div id="foodContainer">
+                </div>
 <!--                없을 때-->
                 <div class="row justify-content-center px-2">
                     <div class="col">
@@ -132,18 +21,17 @@
                                 인식되지 않은 음식이 있나요?
                             </div>
                             <div class="col text-end">
-                                <button class="btn btn-secondary" >추가하기</button>
+                                <a href="/diet/detail_search/" class="btn btn-secondary" >추가하기</a>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="row flex-fill"></div>
         <div class="row">
             <div class="d-grid gap-2">
-                <input type="submit" class="btn btn-primary mb-3" value="입력 완료"/>
+                <a href="/diet/add/" class="btn btn-primary mb-3" >입력 완료</a>
             </div>
         </div>
     </form>

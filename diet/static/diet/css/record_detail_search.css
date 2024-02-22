@@ -1,6 +1,9 @@
-
 main{
     display: flex;
+}
+
+nav {
+    display: none;
 }
 
 .container{

@@ -11,8 +11,7 @@
         <div class="row mb-3">
                 <img src="{% static 'asset/banner_recommend.jpeg' %}" alt="배너" class="banner"/>
         </div>
-
-<!--        콘텐츠 영역 -->
+        <!--  콘텐츠 영역 -->
         <div class="container">
 <!--            새로 추천 버튼-->
             <div class="row mb-3">
@@ -30,7 +29,7 @@
                     <div class="row border border-top-0 border-start-0 border-end-0 justify-content-center py-3">
                         <div role="button" class="row py-3 expand">
                             <div class="col-5 text-center">
-                                <img src="/static/asset/food_images/{{food.name}}.jpg" class="recom-food-img rounded-circle"/>
+                                <img id="img-{{food.id}}" src="/static/asset/food_images/{{food.name}}.jpg" class="recom-food-img rounded-circle"/>
                             </div>
                             <div class="col-7">
                                 <div class="row p-0">
@@ -53,13 +52,13 @@
                         <div class="row justify-content-center nutrition d-none">
                             <div class="row mb-3">
                                 <div class="d-flex align-items-center mt-2 summary-box py-3">
-                                    <span class="nutrition-status badge bg-warning me-5"> 부족</span>
+                                    <span class="nutrition-status badge bg-primary me-5"> 적정</span>
                                     <span class="grayscale-02">탄수화물 {{food.carbohydrate}}g · 단백질 {{food.protein}}g · 지방 {{food.fat}}g</span>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <input type="button" class="btn btn-primary py-2" value="맞춤 식단 기록하기"/>
+                                <a id="btn-{{food.id}}" href="{% url 'diet:record_add_with_recommend' food.id %} " type="button" class="btn btn-primary py-2">맞춤 식단 기록하기</a>
                             </div>
                         </div>
                     </div>
@@ -71,4 +70,45 @@
 {% endblock main %}
 {% block script %}
 <script src="{% static 'diet/js/recommend.js' %}"></script>
+
+<script>
+    {% for food in food_list %}
+        // 'btn-{{food.id}}' 요소에 클릭 이벤트 리스너 추가
+        document.getElementById('btn-{{food.id}}').addEventListener('click', async function(e) {
+
+            // 해당 음식의 이미지 요소를 찾습니다.
+            const imageUrl = document.getElementById('img-{{food.id}}').src;
+            var foodImage;
+            var foodInfo = {};
+            var imagePreview;
+
+            // 새로운 item을 추가한다.
+            try {
+                foodImage = await convertImgToBase64URL(imageUrl);
+                imagePreview = foodImage;
+            } catch (error) {
+                console.error(error);
+            }
+
+            foodInfo[{{food.id}}] = {
+                    name: "{{food.name}}",
+                    calorie: {{food.calorie}},
+                    carbohydrate: {{food.carbohydrate}},
+                    protein: {{food.protein}},
+                    fat: {{food.fat}},
+                    img: foodImage,
+                    quantity: 1
+                };
+
+            localStorage.clear();
+            localStorage.setItem('foodInfo', JSON.stringify(foodInfo));
+            localStorage.setItem('imagePreview', imagePreview);
+
+        });
+    {% endfor %}
+
+
+</script>
+
 {% endblock script %}
+

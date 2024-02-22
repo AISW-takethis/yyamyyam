@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}식단 기록{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'diet/css/record_list.css' %}">
@@ -21,7 +22,6 @@
                     <div id="prev-week" role="button" class="text-end"><</div>
                 </div>
                 <div id="this-date" class="col-4 text-center fw-bold">
-                    2월 12일 (월)
                 </div>
                 <div class="col-4 ">
                     <div id="next-week" role="button" class="">></div>
@@ -44,10 +44,16 @@
             <!-- 식단 기록 영역 -->
             <div class="mb-4 py-3">
               <h2>식단 기록</h2>
-              <span class="fs-5">847Kcal</span><span> / 2,100Kcal</span>
+              <span class="fs-5">{{day_calorie|intcomma}}Kcal</span><span> / {{ user_calorie|intcomma }}Kcal</span>
               <div class="d-flex align-items-center mt-2 summary-box py-3">
-                  <span class="nutrition-status badge bg-warning me-5"> 부족</span>
-                  <span class="grayscale-02">탄수화물 118g · 단백질 31g · 지방 22g</span>
+                  {% if day_calorie > user_calorie|add:"500" %}
+                    <span class="nutrition-status badge bg-danger me-5"> 초과</span>
+                    {% elif day_calorie < user_calorie|add:"-1000" %}
+                    <span class="nutrition-status badge bg-warning me-5"> 부족</span>
+                    {% else %}
+                    <span class="nutrition-status badge bg-primary me-5"> 적정</span>
+                    {% endif %}
+                  <span class="grayscale-02">탄수화물 {{day_carbohydrate}}g · 단백질 {{day_protein}}g · 지방 {{day_fat}}g</span>
               </div>
             </div>
         </div>
@@ -55,60 +61,122 @@
         <!-- 식사별 카드 영역 -->
         <div class="container">
             <!-- 아침 카드 -->
+            <!-- 0: id, 1: info -->
+            {% for diet in diet_list %}
+            <a id="edit-{{diet.0}}" class="edit-link" href="{% url 'diet:record_edit' diet.0 %}">
             <div class="row d-flex align-items-center meal-card px-1 py-3 mx-1">
-
                 <div class="col-2 align-items-center text-center">
                     <div class="row mb-2">
+                        {% if diet.1.meal == '아침' %}
                         <i class="fas fa-coffee"></i>
+                        {% elif diet.1.meal == '점심' %}
+                        <i class="fas fa-sun"></i>
+                        {% elif diet.1.meal == '저녁' %}
+                        <i class="fas fa-utensils"></i>
+                        {% elif diet.1.meal == '간식' %}
+                        <i class="fas fa-cookie-bite"></i>
+                        {% else %}
+                        <i class="fas fa-moon"></i>
+                        {% endif %}
                     </div>
                     <div class="row justify-content-center">
-                        아침
+                        {{diet.1.meal}}
                     </div>
                 </div>
                 <div class="col-3">
-                    <img src="{% static 'asset/food_image.png' %}" style="width:70px;" alt="아침 식사 이미지" />
+                    <img src="/{{diet.1.image_path}}" style="width:70px; height:70px;" alt="식사 이미지" />
                 </div>
                 <div class="col-7">
                     <div>
                         <div class="d-flex justify-content-between">
-                            <span class="fs-5">364kcal</span>
+                            <span class="fs-5">{{diet.1.total_calorie|intcomma}}kcal</span>
                             <i class="fas fa-pen grayscale-02"> </i>
                         </div>
                         <div>
-                            <span class="grayscale-02">탄수화물 54g · 단백질 24g · 지방 8g</span>
+                            <span class="grayscale-02">탄수화물 {{diet.1.total_carbohydrate}}g · 단백질 {{diet.1.total_protein}}g · 지방 {{diet.1.total_fat}}g</span>
                         </div>
                     </div>
                 </div>
-            </div> <!-- 아침 카드 끝-->
-
-            <!-- 점심 카드 -->
-            <div class="row d-flex align-items-center meal-card px-1 py-3 mx-1 my-3">
-
-                <div class="col-2 align-items-center text-center">
-                    <div class="row mb-2">
-                        <i class="fas fa-coffee"></i>
-                    </div>
-                    <div class="row justify-content-center">
-                        점심
-                    </div>
-                </div>
-                <div class="col-3">
-                    <img src="{% static 'asset/food_image.png' %}" style="width:70px;" alt="아침 식사 이미지" />
-                </div>
-                <div class="col-7">
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <span class="fs-5">364kcal</span>
-                            <i class="fas fa-pen grayscale-02"> </i>
-                        </div>
-                        <div>
-                            <span class="grayscale-02">탄수화물 54g · 단백질 24g · 지방 8g</span>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- 점심 카드 끝-->
+            </div> <!-- 식사 카드 끝-->
+            </a>
+            {% endfor %}
           </div>
 {% endblock main %}
 {% block script %}
+<script type="module">
+    async function updateFoodInfo(){
+        var link_elements = document.getElementsByClassName('edit-link')
+            for (var i = 0; i < link_elements.length; i++) {
+                link_elements[i].addEventListener('click', async function(event) {
+                    var id = this.id;
+                    // id에서 edit-를 제거하고 숫자만 추출
+                    id = id.replace('edit-', '');
+                    var foodInfo = {};
+                    localStorage.setItem('foodInfo', JSON.stringify(foodInfo));
+
+                    var takeAt;
+                    var selectedOption;
+                    var image_path;
+                    var imagePreview;
+                    var meal_memo;
+                    var text_date;
+                    var text_time;
+
+                    // diet_list를 순회하며 id와 같은 것을 찾아서 해당 정보를 localStorage에 저장
+                    {% for diet in diet_list %}
+                    if ('{{ diet.0 }}' == id) {
+                        takeAt = '{{ diet.1.take_at }}';
+                        selectedOption = '{{ diet.1.selected_option }}';
+                        image_path = '/{{ diet.1.image_path }}';
+                        meal_memo = '{{ diet.1.memo }}';
+                        text_date = '{{ diet.1.text_date }}';
+                        text_time = '{{ diet.1.text_time }}';
+
+                        try {
+                            imagePreview = await convertImgToBase64URL(image_path);
+                        } catch (error) {
+                            console.error(error);
+                        }
+                    }
+                    {% endfor %}
+
+                    {% for detail in detail_list %}
+                        if ('{{ detail.0 }}' == id) {
+                             var img_path = '/{{ detail.8 }}';
+                             var temp = localStorage.getItem('foodInfo') ? JSON.parse(localStorage.getItem('foodInfo')) : {};
+
+                             try {
+                                 var base64Img = await convertImgToBase64URL(img_path);
+                             } catch (error) {
+                                 console.error(error);
+                             }
+                                temp[{{ detail.1 }}] = {
+                                    name: '{{ detail.2 }}',
+                                    carbohydrate: '{{ detail.3 }}',
+                                    protein: '{{ detail.4 }}',
+                                    fat: '{{ detail.5 }}',
+                                    calorie: '{{ detail.6 }}',
+                                    quantity: '{{ detail.7 }}',
+                                    img: base64Img
+                            };
+                            localStorage.setItem('foodInfo', JSON.stringify(temp));
+                        }
+                    {% endfor %}
+
+                    localStorage.setItem('image_path', image_path);
+                    localStorage.setItem('imagePreview', imagePreview);
+                    localStorage.setItem('selectedOption', selectedOption);
+                    localStorage.setItem('mealMemo', meal_memo);
+                    localStorage.setItem('text-date', text_date);
+                    localStorage.setItem('text-time', text_time);
+                    localStorage.setItem('takeAt', takeAt);
+            })};
+    }
+
+    updateFoodInfo();
+</script>
+<script>
+    var thisDate = '{{ date|safe }}';
+</script>
 <script src="{% static 'diet/js/record_list.js' %}"></script>
 {% endblock script %}

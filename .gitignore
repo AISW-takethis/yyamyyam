@@ -444,5 +444,7 @@ fabric.properties
 .erd
 
 # mksoo images
-/static/asset/food_images/
+/static/asset/food_images/*
 foods.csv
+/static/media/user_food/*
+/static/media/user_food_detail/*

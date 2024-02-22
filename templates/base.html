@@ -15,14 +15,23 @@
 <body>
 <div class="mobile">
     <header>
-        <h1>{% block header %}헤더 제목{% endblock header %}</h1>
+        <div class="row px-3 d-flex flex-fill justify-content-between align-items-center">
+            <div class="col-1">
+                <span role="button" class="fs-2 grayscale-02 d-none" id="go-back"><</span>
+            </div>
+            <div class="col-9 text-center">
+                <h1>{% block header %}헤더 제목{% endblock header %}</h1>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
     </header>
     <main class="overflow-auto">
         {# {% include 'loading.html' %}#}
     {% block main %}
     {% endblock %}
     </main>
-    <nav>
+    <nav id="main-nav">
         {% include 'navbar.html' %}
     </nav>
 </div>
