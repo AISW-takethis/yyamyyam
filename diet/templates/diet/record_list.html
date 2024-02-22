@@ -108,6 +108,7 @@
         var link_elements = document.getElementsByClassName('edit-link')
             for (var i = 0; i < link_elements.length; i++) {
                 link_elements[i].addEventListener('click', async function(event) {
+                    event.preventDefault();
                     var id = this.id;
                     // id에서 edit-를 제거하고 숫자만 추출
                     id = id.replace('edit-', '');
@@ -140,11 +141,11 @@
                     }
                     {% endfor %}
 
+                    try{
                     {% for detail in detail_list %}
                         if ('{{ detail.0 }}' == id) {
                              var img_path = '/{{ detail.8 }}';
                              var temp = localStorage.getItem('foodInfo') ? JSON.parse(localStorage.getItem('foodInfo')) : {};
-
                              try {
                                  var base64Img = await convertImgToBase64URL(img_path);
                              } catch (error) {
@@ -162,7 +163,6 @@
                             localStorage.setItem('foodInfo', JSON.stringify(temp));
                         }
                     {% endfor %}
-
                     localStorage.setItem('image_path', image_path);
                     localStorage.setItem('imagePreview', imagePreview);
                     localStorage.setItem('selectedOption', selectedOption);
@@ -170,6 +170,11 @@
                     localStorage.setItem('text-date', text_date);
                     localStorage.setItem('text-time', text_time);
                     localStorage.setItem('takeAt', takeAt);
+                    } catch (error) {
+                        console.error(error);
+                    } finally {
+                        window.location.href = '/diet/edit/' + id;
+                    }
             })};
     }
 
