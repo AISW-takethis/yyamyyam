@@ -238,10 +238,14 @@ def convert_string_to_datetime(date_string):
         date_string = date_string.replace("오후", "PM")
 
     # datetime 객체로 변환
+
     date_format = "%Y년 %m월 %d일 %I:%M %p"
-    result = datetime.strptime(date_string, date_format)
+    try:
+        result = datetime.strptime(date_string, date_format)
+    except ValueError:
+        date_format = "%Y년 %m월 %d일 %p %I:%M"
+        result = datetime.strptime(date_string, date_format)
     result = timezone.make_aware(result, timezone.get_default_timezone())
-    print(result)
     return result
 
 
@@ -273,6 +277,8 @@ def record_add(request):
         # test
 
         date_list = [int(i[:-1]) for i in datetime_list[:3]]
+
+        print(date_list)
 
         diet.take_at = convert_string_to_datetime(data["take_at"])
         diet.take_date = datetime(*date_list).date()
@@ -343,7 +349,7 @@ def record_add(request):
 
     now, date, time, meal_type = record_date_mealtype()
 
-    # 직접 입력하는거 구현하기
+    # # 직접 입력하는거 구현하기
     return render(
         request,
         "diet/record_add.html",
@@ -389,7 +395,25 @@ def record_edit(request, record_id):
             "static", "media", "user_food", image_file_name
         )
 
-        print(request.POST)
+        diet = UserDiet.objects.filter(id=record_id).first()
+
+        datetime_list = data["take_at"].strip().split()
+
+        # test
+        date_list = [int(i[:-1]) for i in datetime_list[:3]]
+
+        # diet.take_at = convert_string_to_datetime(data["take_at"])
+        # diet.take_date = datetime(*date_list).date()
+        diet.meal = data["meal"]  # 1: 아침, 2: 점심, 3: 저녁, 4:간식, 5: 야식
+        diet.memo = data["meal_memo"]  # 식사 메모
+        diet.updated_at = save_datetime  # 수정 시간
+        diet.save()
+
+        return HttpResponseRedirect(
+            reverse(
+                "diet:record_list",
+            )
+        )
 
     return render(request, "diet/record_add.html", {"record_id": record_id})
 
