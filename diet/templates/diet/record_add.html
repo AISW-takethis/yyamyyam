@@ -10,6 +10,7 @@
 {% include 'confirm.html' %}
 <div class="container-fluid mt-3 px-4">
     <form id="record_form" method="post" enctype="multipart/form-data" action="{% if record_id %}{% url 'diet:record_edit' record_id %}{% else %} {% url 'diet:record_add' %}{% endif %}">
+        <input hidden name="record_id" value="{{ record_id }}">
         {% csrf_token %}
         <div class="row align-items-center d-flex justify-content-between mb-3">
             <input type="hidden" id="text-now" name="take_at" value="{{ now }}" readonly>

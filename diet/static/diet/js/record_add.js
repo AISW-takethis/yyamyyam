@@ -1,3 +1,5 @@
+
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -95,23 +97,35 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // "촬영 시간" 버튼 클릭 이벤트
-    shootingTimeButton.addEventListener('click', function () {
+    shootingTimeButton.addEventListener('click', async function () {
         if (lastModifiedDate) {
             console.log(formatDate(lastModifiedDate), formatTime(lastModifiedDate), formatLastModifiedDate(lastModifiedDate));
             changeTakeAt(formatDate(lastModifiedDate), formatTime(lastModifiedDate), formatLastModifiedDate(lastModifiedDate));
             // loding modal의 'd-none' class를 제거하여 화면에 보이게 합니다.
-//            loading.classList.remove('d-none');
+            loading.classList.remove('d-none');
+
+            await setTimeout(function(){
+                loading.classList.add('d-none');
+
+
+            }, 3000);
         } else {
             console.log('파일이 선택되지 않았거나 촬영 시간을 확인할 수 없습니다.');
         }
     });
 
     // "현재 시간" 버튼 클릭 이벤트
-    currentTimeButton.addEventListener('click', function () {
+    currentTimeButton.addEventListener('click', async function () {
         const currentTime = new Date();
         changeTakeAt(formatDate(currentTime), formatTime(currentTime), formatLastModifiedDate(currentTime));
         // loding modal의 'd-none' class를 제거하여 화면에 보이게 합니다.
         loading.classList.remove('d-none');
+
+        await setTimeout(function(){
+                loading.classList.add('d-none');
+
+
+            }, 3000);
     });
 
 
@@ -126,8 +140,10 @@ document.addEventListener('DOMContentLoaded', function () {
         var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
 
 
-        reader.onload = function (e) {
+        reader.onload = async function (e) {
+
             imagePreview.src = e.target.result;
+
             imagePreview.hidden = false;
             imageBase64.value = imagePreview.src;
             localStorage.setItem('imagePreview', imagePreview.src);
@@ -235,6 +251,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                 `
             foodDetailList.appendChild(foodElement);
+
+
         });
 
         // 칼로리 관련 ====================================================================

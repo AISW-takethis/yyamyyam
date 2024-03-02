@@ -1,0 +1,6 @@
+billiard==4.2.0
+black==24.1.1
+Django==5.0.1
+django-allauth==0.60.1
+django-environ==0.11.2
+psycopg2==2.9.9
